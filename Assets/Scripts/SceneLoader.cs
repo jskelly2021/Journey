@@ -18,7 +18,10 @@ public class SceneLoader : MonoBehaviour
 
     public void loadScene(string sceneName)
     {
-        StartCoroutine(loadSceneAsync(sceneName));
+        Scene sceneToLoad = SceneManager.GetSceneByName(sceneName);
+
+        if (!sceneToLoad.IsValid())
+            StartCoroutine(loadSceneAsync(sceneName));
     }
 
     public void unloadScene(string sceneName)
