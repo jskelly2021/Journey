@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Eflatun.SceneReference;
-using System;
 
 public class SceneLoader : MonoBehaviour
 {

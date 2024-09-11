@@ -4,20 +4,21 @@ using System;
 
 public class SceneController : MonoBehaviour
 {
-    [SerializeField] private SceneReference thisScene;
-    [SerializeField] private SceneReference nextScene;
+    [SerializeField] private SceneReference sceneToLoad;
+    [SerializeField] private SceneReference sceneToUnload;
 
     public static event Action<SceneReference> LoadScene;
     public static event Action<SceneReference> UnloadScene;
+    public static event Action<SceneReference> SetActive;
 
     public void loadScene()
     {
-        LoadScene(nextScene);
+        LoadScene(sceneToLoad);
     }
 
     public void unloadScene()
     {
-        UnloadScene(thisScene);
+        UnloadScene(sceneToUnload);
     }
 
     public void quitGame()
