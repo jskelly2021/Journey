@@ -9,18 +9,15 @@ public class SceneLoader : MonoBehaviour
 
     [SerializeField] private SceneReference bootScene;
 
-    public SceneLoader Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = new SceneLoader();
-            return instance;
-        }
-    }
+    public SceneLoader Instance { get { return instance; } }
 
     private void Awake()
     {
+        if (instance != null && Instance != this)
+            Destroy(this.gameObject);
+        else
+            instance = this;
+
         loadScene(bootScene);
     }
 

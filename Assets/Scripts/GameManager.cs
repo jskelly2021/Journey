@@ -5,13 +5,18 @@ public sealed class GameManager : MonoBehaviour
     private static GameManager instance = null;
     private SceneLoader sceneLoader;
 
-    public GameManager Instance 
+    public GameManager Instance { get { return instance; } }
+
+    private void Awake()
     {
-        get
-        {
-            if (instance == null)
-                instance = new GameManager();
-            return instance;
-        }
+        if (instance != null && Instance != this)
+            Destroy(this.gameObject);
+        else
+            instance = this;
+    }
+
+    public void quit()
+    {
+        Application.Quit();
     }
 }
