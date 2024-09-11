@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Eflatun.SceneReference;
+using System;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -19,6 +20,18 @@ public class SceneLoader : MonoBehaviour
             instance = this;
 
         loadScene(bootScene);
+
+    }
+
+    private void OnEnable()
+    {
+        SceneController.LoadScene += loadScene;
+        SceneController.UnloadScene += unloadScene;
+    }
+    private void OnDisable()
+    {
+        SceneController.LoadScene -= loadScene;
+        SceneController.UnloadScene -= unloadScene;
     }
 
     public void loadScene(SceneReference sceneToLoad)

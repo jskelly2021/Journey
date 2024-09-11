@@ -1,31 +1,26 @@
 using UnityEngine;
 using Eflatun.SceneReference;
+using System;
 
 public class SceneController : MonoBehaviour
 {
-    private SceneLoader sceneLoader;
-    private GameManager gameManager;
     [SerializeField] private SceneReference thisScene;
     [SerializeField] private SceneReference nextScene;
 
-    private void Awake()
-    {
-        sceneLoader = GameObject.FindObjectOfType<SceneLoader>().Instance;   
-        gameManager = GameObject.FindObjectOfType<GameManager>().Instance;
-    }
+    public static event Action<SceneReference> LoadScene;
+    public static event Action<SceneReference> UnloadScene;
 
     public void loadScene()
     {
-        sceneLoader.loadScene(nextScene);
+        LoadScene(nextScene);
     }
 
     public void unloadScene()
     {
-        sceneLoader.unloadScene(thisScene);
+        UnloadScene(thisScene);
     }
 
     public void quitGame()
     {
-        gameManager.quit();
     }
 }
