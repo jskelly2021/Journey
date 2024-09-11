@@ -27,32 +27,29 @@ public class SceneLoader : MonoBehaviour
     public void loadScene(SceneReference sceneToLoad)
     {
         if (!SceneManager.GetSceneByPath(sceneToLoad.Path).IsValid())
-            StartCoroutine(loadSceneAsync(sceneToLoad.Name));
+            StartCoroutine(loadSceneAsync(sceneToLoad));
     }
 
-    public void unloadScene(string sceneName)
+    public void unloadScene(SceneReference sceneToUnload)
     {
-        StartCoroutine(unloadSceneAsync(sceneName));
+        StartCoroutine(unloadSceneAsync(sceneToUnload));
     }
 
-    private IEnumerator loadSceneAsync(string sceneName)
+    private IEnumerator loadSceneAsync(SceneReference sceneToLoad)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-        Debug.Log(SceneManager.GetActiveScene().name);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad.Path, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
             yield return null;
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
-        Debug.Log(SceneManager.GetActiveScene().name);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByPath(sceneToLoad.Path));
     }
 
-    private IEnumerator unloadSceneAsync(string sceneName)
+    private IEnumerator unloadSceneAsync(SceneReference sceneToUnload)
     {
-        while (SceneManager.GetActiveScene().name == sceneName)
+        while (SceneManager.GetActiveScene().path == sceneToUnload.Path)
             yield return null;
 
-        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(sceneName, UnloadSceneOptions.None);
-        Debug.Log(sceneName + " is unloaded");
+        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(sceneToUnload.Path, UnloadSceneOptions.None);
     }
 }
