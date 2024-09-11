@@ -3,6 +3,7 @@ using UnityEngine;
 public sealed class GameManager : MonoBehaviour
 {
     private static GameManager instance = null;
+    private SceneLoader sceneLoader;
 
     public GameManager Instance 
     {
@@ -13,4 +14,11 @@ public sealed class GameManager : MonoBehaviour
             return instance;
         }
     }
+
+    private void Awake()
+    {
+        sceneLoader = GameObject.FindFirstObjectByType<SceneLoader>();
+        sceneLoader.loadScene("MainMenu");
+    }
+
 }

@@ -40,7 +40,6 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator unloadSceneAsync(string sceneName)
     {
-
         while (SceneManager.GetActiveScene().name == sceneName)
             yield return null;
 
