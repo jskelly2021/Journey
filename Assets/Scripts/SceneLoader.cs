@@ -7,7 +7,7 @@ public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader instance = null;
 
-    [SerializeField] public SceneReference bootScene;
+    [SerializeField] private SceneReference bootScene;
 
     public SceneLoader Instance
     {
