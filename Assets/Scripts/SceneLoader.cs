@@ -6,6 +6,8 @@ public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader instance = null;
 
+    [SerializeField] public Scene bootScene;
+
     public SceneLoader Instance
     {
         get
@@ -19,6 +21,8 @@ public class SceneLoader : MonoBehaviour
     public void loadScene(string sceneName)
     {
         Scene sceneToLoad = SceneManager.GetSceneByName(sceneName);
+
+        Debug.Log(sceneToLoad.name);
 
         if (!sceneToLoad.IsValid())
             StartCoroutine(loadSceneAsync(sceneName));
@@ -49,5 +53,4 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(sceneName, UnloadSceneOptions.None);
         Debug.Log(sceneName + " is unloaded");
     }
-
 }

@@ -20,5 +20,4 @@ public sealed class GameManager : MonoBehaviour
         sceneLoader = GameObject.FindFirstObjectByType<SceneLoader>();
         sceneLoader.loadScene("MainMenu");
     }
-
 }
