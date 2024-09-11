@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Eflatun.SceneReference;
 
 public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader instance = null;
 
-    [SerializeField] public Scene bootScene;
+    [SerializeField] public SceneReference bootScene;
 
     public SceneLoader Instance
     {
@@ -18,14 +19,15 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
-    public void loadScene(string sceneName)
+    private void Awake()
     {
-        Scene sceneToLoad = SceneManager.GetSceneByName(sceneName);
+        loadScene(bootScene);
+    }
 
-        Debug.Log(sceneToLoad.name);
-
-        if (!sceneToLoad.IsValid())
-            StartCoroutine(loadSceneAsync(sceneName));
+    public void loadScene(SceneReference sceneToLoad)
+    {
+        if (!SceneManager.GetSceneByPath(sceneToLoad.Path).IsValid())
+            StartCoroutine(loadSceneAsync(sceneToLoad.Name));
     }
 
     public void unloadScene(string sceneName)

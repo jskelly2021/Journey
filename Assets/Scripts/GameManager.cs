@@ -14,10 +14,4 @@ public sealed class GameManager : MonoBehaviour
             return instance;
         }
     }
-
-    private void Awake()
-    {
-        sceneLoader = GameObject.FindFirstObjectByType<SceneLoader>();
-        sceneLoader.loadScene("MainMenu");
-    }
 }
