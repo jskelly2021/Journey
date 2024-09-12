@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -158,7 +158,7 @@ PrefabInstance:
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 2072599234}
+      objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: loadScene
+      value: setSceneActive
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: setSceneActive
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: SceneController, Assembly-CSharp
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2417125846524152221, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_Name
@@ -342,7 +342,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -374,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: unloadScene
+      value: setSceneActive
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -382,7 +382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: setSceneActive
+      value: unloadScene
       objectReference: {fileID: 0}
     - target: {fileID: 2134439998719625871, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
