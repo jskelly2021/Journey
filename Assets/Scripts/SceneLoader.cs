@@ -18,7 +18,7 @@ public class SceneLoader : MonoBehaviour
         else
             instance = this;
 
-        loadScene(bootScene);
+        loadScene(bootScene, true);
 
     }
 
@@ -33,10 +33,10 @@ public class SceneLoader : MonoBehaviour
         SceneController.UnloadScene -= unloadScene;
     }
 
-    public void loadScene(SceneReference sceneToLoad)
+    public void loadScene(SceneReference sceneToLoad, bool setActive)
     {
         if (!SceneManager.GetSceneByPath(sceneToLoad.Path).IsValid())
-            StartCoroutine(loadSceneAsync(sceneToLoad));
+            StartCoroutine(loadSceneAsync(sceneToLoad, setActive));
     }
 
     public void unloadScene(SceneReference sceneToUnload)
@@ -44,14 +44,15 @@ public class SceneLoader : MonoBehaviour
         StartCoroutine(unloadSceneAsync(sceneToUnload));
     }
 
-    private IEnumerator loadSceneAsync(SceneReference sceneToLoad)
+    private IEnumerator loadSceneAsync(SceneReference sceneToLoad, bool setActive)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad.Path, LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
             yield return null;
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByPath(sceneToLoad.Path));
+        if (setActive)
+            SceneManager.SetActiveScene(SceneManager.GetSceneByPath(sceneToLoad.Path));
     }
 
     private IEnumerator unloadSceneAsync(SceneReference sceneToUnload)

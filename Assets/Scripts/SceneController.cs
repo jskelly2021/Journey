@@ -7,13 +7,12 @@ public class SceneController : MonoBehaviour
     [SerializeField] private SceneReference sceneToLoad;
     [SerializeField] private SceneReference sceneToUnload;
 
-    public static event Action<SceneReference> LoadScene;
+    public static event Action<SceneReference, bool> LoadScene;
     public static event Action<SceneReference> UnloadScene;
-    public static event Action<SceneReference> SetActive;
 
-    public void loadScene()
+    public void loadScene(bool setActive)
     {
-        LoadScene(sceneToLoad);
+        LoadScene(sceneToLoad, setActive);
     }
 
     public void unloadScene()
