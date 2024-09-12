@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1679218034858952706}
   - component: {fileID: 2134439998719625871}
   m_Layer: 5
-  m_Name: NavButton
+  m_Name: NavCanvasButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,19 +121,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1679218034858952706}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: loadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: MainScene
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6890709111970202085
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,8 +197,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288914352
-  m_fontColor: {r: 0.6886792, g: 0.63995194, b: 0.63995194, a: 1}
+    rgba: 4291151333
+  m_fontColor: {r: 0.8962264, g: 0.7736294, b: 0.7736294, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
