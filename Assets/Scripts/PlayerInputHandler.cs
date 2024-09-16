@@ -1,17 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour
+public class PlayerInputHandler : MonoBehaviour, PlayerInputAction.IPlayerActions
 {
-
     private void Awake()
     {
-           
     }
 
-    private void OnPauseAction()
+    public void OnPause(InputAction.CallbackContext context)
     {
-
     }
-
 }

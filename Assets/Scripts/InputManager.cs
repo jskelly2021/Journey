@@ -1,33 +1,45 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviour, PlayerInputAction.IPlayerActions
 {
-    [SerializeField] private PlayerInputAction playerInput;
+    private static PlayerInputAction playerInput;
+
+    public static PlayerInputAction PlayerInput 
+    { 
+        get 
+        { 
+            if (playerInput == null) return new PlayerInputAction();
+            return playerInput; 
+        } 
+    }
 
     private void Awake()
     {
-        
+        playerInput = new PlayerInputAction();
+        playerInput.Player.SetCallbacks(this);
     }
 
     private void OnEnable()
     {
-        InputController.SetActionMap += setActionMap;
-        InputController.ToggleActionMap += toggleActionMap;
+        playerInput.Enable();
+        InputController.EnableActionMap += enableActionMap;
     }
 
     private void OnDiable()
     {
-        InputController.SetActionMap -= setActionMap;
-        InputController.ToggleActionMap -= toggleActionMap;
+        playerInput.Disable();
+        InputController.EnableActionMap -= enableActionMap;
     }
 
-    private void setActionMap(string actionMap)
+    private void enableActionMap(string actionMap)
     {
+        Debug.Log("Toggling " + actionMap);
+        playerInput.asset.FindActionMap(actionMap).Enable();
     }
 
-    private void toggleActionMap(string actionMap)
+    public void OnPause(InputAction.CallbackContext context)
     {
+        Debug.Log("Game Paused");
     }
-
 }
