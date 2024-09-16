@@ -1,7 +1,6 @@
 using UnityEngine;
 using Eflatun.SceneReference;
 using System;
-using System.Collections.Generic;
 
 public class SceneController : MonoBehaviour
 {

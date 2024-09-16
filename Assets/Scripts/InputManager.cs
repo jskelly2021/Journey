@@ -3,39 +3,31 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    private PlayerInput playerInput; 
+    [SerializeField] private PlayerInputAction playerInput;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
+        
     }
 
     private void OnEnable()
     {
         InputController.SetActionMap += setActionMap;
-        InputController.EnableActionMap += enableActionMap;
-        InputController.DisableActionMap += disableActionMap;
+        InputController.ToggleActionMap += toggleActionMap;
     }
 
     private void OnDiable()
     {
         InputController.SetActionMap -= setActionMap;
-        InputController.EnableActionMap -= enableActionMap;
-        InputController.DisableActionMap -= disableActionMap;
+        InputController.ToggleActionMap -= toggleActionMap;
     }
 
     private void setActionMap(string actionMap)
     {
-       playerInput.SwitchCurrentActionMap(actionMap);
     }
 
-    private void enableActionMap(string actionMap)
+    private void toggleActionMap(string actionMap)
     {
-        playerInput.actions.FindActionMap(actionMap).Enable();
     }
 
-    private void disableActionMap(string actionMap)
-    {
-        playerInput.actions.FindActionMap(actionMap).Disable();
-    }
 }

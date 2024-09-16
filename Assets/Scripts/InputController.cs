@@ -1,26 +1,23 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    [SerializeField] private string actionMap;
-
     public static event Action<string> SetActionMap;
     public static event Action<string> EnableActionMap;
     public static event Action<string> DisableActionMap;
     
-    public void setActionMap()
+    public void setActionMap(string actionMap)
     {
         SetActionMap(actionMap);
     }
 
-    public void enableActionMap()
+    public void enableActionMap(string actionMap)
     {
         EnableActionMap(actionMap);
     }
 
-    public void disableActionMap()
+    public void disableActionMap(string actionMap)
     {
         DisableActionMap(actionMap);
     }
