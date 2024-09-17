@@ -5,7 +5,6 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInputAction.IPlayerAction
 {
     private void Start()
     {
-        Debug.Log("In InputHandler");
         InputManager.Instance.PlayerInput.Player.SetCallbacks(this);
     }
 
