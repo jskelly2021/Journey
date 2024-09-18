@@ -19,7 +19,6 @@ public class SceneLoader : MonoBehaviour
             instance = this;
 
         loadScene(bootScene);
-
     }
 
     private void OnEnable()

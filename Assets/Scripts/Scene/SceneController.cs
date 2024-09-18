@@ -11,22 +11,11 @@ public class SceneController : MonoBehaviour
     public static event Action<SceneReference> UnloadScene;
     public static event Action<SceneReference> SetSceneActive;
 
-    public void loadScene()
-    {
-        LoadScene?.Invoke(sceneToLoad);
-    }
+    public void loadScene() => LoadScene?.Invoke(sceneToLoad);
 
-    public void unloadScene()
-    {
-        UnloadScene?.Invoke(sceneToUnload);
-    }
+    public void unloadScene() => UnloadScene?.Invoke(sceneToUnload);
 
-    public void setSceneActive()
-    {
-        SetSceneActive?.Invoke(sceneToLoad);
-    }
+    public void setSceneActive() => SetSceneActive?.Invoke(sceneToLoad);
 
-    public void quitGame()
-    {
-    }
+    public void quitGame() {}
 }

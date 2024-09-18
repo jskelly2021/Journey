@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -23,16 +22,16 @@ public class InputManager : MonoBehaviour
     {
         playerInput.Enable();
         InputController.EnableActionMap += enableActionMap;
+        InputController.DisableActionMap += disableActionMap;
     }
 
     private void OnDisable()
     {
         playerInput.Disable();
         InputController.EnableActionMap -= enableActionMap;
-    }
+        InputController.DisableActionMap -= disableActionMap;
+   }
 
-    private void enableActionMap(string actionMap)
-    {
-        playerInput.asset.FindActionMap(actionMap).Enable();
-    }
+    private void enableActionMap(string actionMap) => playerInput.asset.FindActionMap(actionMap).Enable();
+    private void disableActionMap(string actionMap) => playerInput.asset.FindActionMap(actionMap).Disable();
 }
