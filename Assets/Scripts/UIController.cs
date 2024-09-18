@@ -8,13 +8,11 @@ public class UIController : MonoBehaviour
     {
         InputHandler.PauseAction += enablePauseMenu;
         InputHandler.ResumeAction += disablePauseMenu;
-
     }
     private void OnDisable()
     {
         InputHandler.PauseAction -= disablePauseMenu;
         InputHandler.ResumeAction -= disablePauseMenu;
-
     }
 
     private void enablePauseMenu() => pauseMenuCanvas.SetActive(true);

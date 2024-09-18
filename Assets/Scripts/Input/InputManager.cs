@@ -18,6 +18,12 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInputAction();
     }
 
+    private void Start()
+    {
+        disableActionMap("Player");
+        disableActionMap("Paused");
+    }
+
     private void OnEnable()
     {
         playerInput.Enable();
@@ -32,6 +38,6 @@ public class InputManager : MonoBehaviour
         InputController.DisableActionMap -= disableActionMap;
    }
 
-    private void enableActionMap(string actionMap) => playerInput.asset.FindActionMap(actionMap).Enable();
-    private void disableActionMap(string actionMap) => playerInput.asset.FindActionMap(actionMap).Disable();
+    private void enableActionMap(string actionMap) => PlayerInput.asset.FindActionMap(actionMap).Enable();
+    private void disableActionMap(string actionMap) => PlayerInput.asset.FindActionMap(actionMap).Disable();
 }
