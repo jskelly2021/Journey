@@ -9,7 +9,7 @@ public class SceneLoader : MonoBehaviour
 
     [SerializeField] private SceneReference bootScene;
 
-    public SceneLoader Instance { get { return instance; } }
+    public static SceneLoader Instance { get { return instance; } }
 
     private void Awake()
     {
@@ -19,7 +19,6 @@ public class SceneLoader : MonoBehaviour
             instance = this;
 
         loadScene(bootScene);
-
     }
 
     private void OnEnable()
