@@ -10,7 +10,9 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
 
     public void OnPause(InputAction.CallbackContext context)
     {
+        if(context.phase == InputActionPhase.Performed)
+            base.Pause();
+        
         Debug.Log("Pausing Game from PlayerInputHandler");
-        base.Pause();
     }
 }
