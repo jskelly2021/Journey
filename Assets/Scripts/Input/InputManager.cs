@@ -33,7 +33,6 @@ public class InputManager : MonoBehaviour
 
     private void enableActionMap(string actionMap)
     {
-        Debug.Log("Activating " + actionMap);
         playerInput.asset.FindActionMap(actionMap).Enable();
     }
 }

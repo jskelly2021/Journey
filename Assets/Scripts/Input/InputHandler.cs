@@ -7,7 +7,6 @@ public abstract class InputHandler: MonoBehaviour
 
     protected void Pause()
     {
-        Debug.Log("Pausing Game from Input Handler");
         PauseAction?.Invoke();
     }
 }

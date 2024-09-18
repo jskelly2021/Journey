@@ -12,7 +12,5 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
     {
         if(context.phase == InputActionPhase.Performed)
             base.Pause();
-        
-        Debug.Log("Pausing Game from PlayerInputHandler");
     }
 }
