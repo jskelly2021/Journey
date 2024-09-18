@@ -19,13 +19,13 @@ public sealed class GameManager : MonoBehaviour
     {
         InputHandler.PauseAction += PauseGame;
         InputHandler.ResumeAction += ResumeGame;
-        
+        QuitController.QuitGame += quit;
     }
     private void OnDisable()
     {
         InputHandler.PauseAction -= PauseGame;
         InputHandler.ResumeAction -= ResumeGame;
-
+        QuitController.QuitGame -= quit;
     }
 
     private void PauseGame()
