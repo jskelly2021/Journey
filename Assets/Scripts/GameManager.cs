@@ -15,7 +15,30 @@ public sealed class GameManager : MonoBehaviour
             instance = this;
     }
 
-    public void quit()
+    private void OnEnable()
+    {
+        InputHandler.PauseAction += PauseGame;
+        InputHandler.ResumeAction += ResumeGame;
+        
+    }
+    private void OnDisable()
+    {
+        InputHandler.PauseAction -= PauseGame;
+        InputHandler.ResumeAction -= ResumeGame;
+
+    }
+
+    private void PauseGame()
+    {
+        Time.timeScale = 0.0f;
+    }
+
+    private void ResumeGame()
+    {
+        Time.timeScale = 1.0f;
+    }
+
+    private void quit()
     {
         Application.Quit();
     }
