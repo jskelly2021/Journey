@@ -1,5 +1,5 @@
 {
-    "name": "player",
+    "name": "PlayerInputAction",
     "maps": [
         {
             "name": "Player",
@@ -551,6 +551,45 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Paused",
+            "id": "2b737bb4-5f9c-45a7-a808-4c4f132f999c",
+            "actions": [
+                {
+                    "name": "Resume",
+                    "type": "Button",
+                    "id": "812215e6-1e43-4840-b085-13812f25ebae",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7ae18898-ee51-48bd-938c-914c2abd0b7a",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9385d754-112f-4556-974d-e990ac4f2788",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Resume",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

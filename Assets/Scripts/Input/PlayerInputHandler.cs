@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
@@ -10,7 +9,12 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        if(context.phase == InputActionPhase.Performed)
-            base.Pause();
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        InputManager.Instance.PlayerInput.Player.Disable();
+        InputManager.Instance.PlayerInput.Paused.Enable();
+
+        base.Pause();
     }
 }

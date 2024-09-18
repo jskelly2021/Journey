@@ -577,6 +577,45 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Paused"",
+            ""id"": ""2b737bb4-5f9c-45a7-a808-4c4f132f999c"",
+            ""actions"": [
+                {
+                    ""name"": ""Resume"",
+                    ""type"": ""Button"",
+                    ""id"": ""812215e6-1e43-4840-b085-13812f25ebae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7ae18898-ee51-48bd-938c-914c2abd0b7a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9385d754-112f-4556-974d-e990ac4f2788"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -657,6 +696,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // Paused
+        m_Paused = asset.FindActionMap("Paused", throwIfNotFound: true);
+        m_Paused_Resume = m_Paused.FindAction("Resume", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -878,6 +920,52 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Paused
+    private readonly InputActionMap m_Paused;
+    private List<IPausedActions> m_PausedActionsCallbackInterfaces = new List<IPausedActions>();
+    private readonly InputAction m_Paused_Resume;
+    public struct PausedActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public PausedActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Resume => m_Wrapper.m_Paused_Resume;
+        public InputActionMap Get() { return m_Wrapper.m_Paused; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PausedActions set) { return set.Get(); }
+        public void AddCallbacks(IPausedActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PausedActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PausedActionsCallbackInterfaces.Add(instance);
+            @Resume.started += instance.OnResume;
+            @Resume.performed += instance.OnResume;
+            @Resume.canceled += instance.OnResume;
+        }
+
+        private void UnregisterCallbacks(IPausedActions instance)
+        {
+            @Resume.started -= instance.OnResume;
+            @Resume.performed -= instance.OnResume;
+            @Resume.canceled -= instance.OnResume;
+        }
+
+        public void RemoveCallbacks(IPausedActions instance)
+        {
+            if (m_Wrapper.m_PausedActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPausedActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PausedActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PausedActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PausedActions @Paused => new PausedActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -939,5 +1027,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IPausedActions
+    {
+        void OnResume(InputAction.CallbackContext context);
     }
 }
