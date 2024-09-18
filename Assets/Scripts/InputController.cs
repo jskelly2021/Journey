@@ -7,6 +7,6 @@ public class InputController : MonoBehaviour
     
     public void enableActionMap(string actionMap)
     {
-        EnableActionMap(actionMap);
+        EnableActionMap?.Invoke(actionMap);
     }
 }

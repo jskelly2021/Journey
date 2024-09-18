@@ -13,17 +13,17 @@ public class SceneController : MonoBehaviour
 
     public void loadScene()
     {
-        LoadScene(sceneToLoad);
+        LoadScene?.Invoke(sceneToLoad);
     }
 
     public void unloadScene()
     {
-        UnloadScene(sceneToUnload);
+        UnloadScene?.Invoke(sceneToUnload);
     }
 
     public void setSceneActive()
     {
-        SetSceneActive(sceneToLoad);
+        SetSceneActive?.Invoke(sceneToLoad);
     }
 
     public void quitGame()
