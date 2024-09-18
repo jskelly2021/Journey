@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour, PlayerInputAction.IPlayerActions
+public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
 {
     private void Start()
     {
@@ -10,6 +10,7 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInputAction.IPlayerAction
 
     public void OnPause(InputAction.CallbackContext context)
     {
-        Debug.Log("Game Paused");
+        Debug.Log("Pausing Game from PlayerInputHandler");
+        base.Pause();
     }
 }
