@@ -1,3 +1,0 @@
-@startuml
-Example1 -> Example2 : test
-@enduml
