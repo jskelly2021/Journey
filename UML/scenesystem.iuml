@@ -1,0 +1,29 @@
+@startuml scenesystem
+class SceneLoader {
+    {static} +Instance
+    -bootScene
+    --
+    -loadScene()
+    -unloadScene()
+    -setSceneActive()
+}
+
+class SceneController {
+    ..Events..
+    {static} +LoadScene
+    {static} +UnloadScene
+    {static} +SetSceneActive
+    --Invokers--
+    +loadScene()
+    +unloadScene()
+    +setSceneActive()
+}
+
+entity GameObject {
+
+}
+
+SceneLoader "1..1 " ..{ "0..* " SceneController : " Listens >"
+SceneController "0..1" -right- "0..*" GameObject : " Has <"
+
+@enduml

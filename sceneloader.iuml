@@ -1,8 +1,0 @@
-@startuml sceneloader
-class SceneLoader {
-    +instance
-}
-class SceneController {
-    +static Event EnableScene
-}
-@enduml

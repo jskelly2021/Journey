@@ -1,0 +1,52 @@
+@startuml inputsystem
+class InputManager {
+    {static} +Instance
+    +PlayerInput
+    --
+    -enableActionMap()
+    -disableActionMap()
+}
+
+abstract InputHandler {
+    ..Events..
+    {static} +PauseAction
+    {static} +ResumeAction
+    --Invokers--
+    #pause()
+    #resume()
+}
+
+class PlayerInputHandler {
+    +OnPause()
+}
+
+class PausedInputHandler {
+    +OnResume()
+}
+
+class PlayerInputAction {
+
+}
+
+class InputController {
+    ..Events..
+    {static} +EnableActionMap
+    {static} +DisableActionMap
+    --Invokers--
+    +enableActionMap()
+    +disableActionMap()
+}
+
+entity GameObject
+
+InputManager        "1..1"       .right.   "0..*"       InputController      : "Listens >"
+InputController     "0..1"       -right-   "0..*"       GameObject           : "Has <"
+
+InputManager        "1..1 "      .down.    "0..1 "      InputHandler         : "Listens >"
+InputHandler        "1..1"       -left-    "1..1"       PlayerInputHandler   : "Inherits >"
+InputHandler        "1..1"       -right-   "1..1"       PausedInputHandler   : "Inherits >"
+
+InputHandler        "1..1"       -down-    "1..1"       PlayerInputAction    : "Has >"
+PlayerInputHandler  "1..1"       -down-    "1..1    "   PlayerInputAction    : "Listens >"
+PausedInputHandler  "1..1     "  -down-    "1..1"       PlayerInputAction    : "Listens >"
+@enduml
