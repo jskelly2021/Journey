@@ -47,14 +47,14 @@ class GameManager {
     -quitGame()
 }
 
-InputManager        "1..1"       .right.   "0..*"       InputController      : "Listens >"
+InputManager        "1..1"       .down.   "0..*"       InputController      : "Listens >"
 InputController     "0..1"       -down-    "0..*"       GameObject           : "Has <"
 
-InputManager        "1..1 "      .left.    "0..1"       InputHandler         : "Listens >"
-InputHandler        "1..1"       -down-    "1..1"       PlayerInputHandler   : "Inherits >"
-InputHandler        "1..1"       -down-    "1..1"       PausedInputHandler   : "Inherits >"
+InputManager        "1..1"       .left.    "0..1"       InputHandler         : "Listens >"
+InputHandler        "1..1   "    -down-    "1..1"       PlayerInputHandler   : "Inherits >"
+InputHandler        "1..1"       -down-    "1..1  "     PausedInputHandler   : "Inherits >"
 
-InputManager        "1..1"       -down-    "1..1"       PlayerInputAction    : "Has >"
+InputManager        "1..1 "      -down-    "1..1"       PlayerInputAction    : "Has >"
 PlayerInputHandler  "1..1"       -down-    "1..1    "   PlayerInputAction    : "Listens >"
 PausedInputHandler  "1..1"       -down-    "1..1"       PlayerInputAction    : "Listens >"
 
