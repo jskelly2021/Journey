@@ -10,7 +10,7 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && Instance != this)
+        if (instance != null && instance != this)
             Destroy(this.gameObject);
         else
             instance = this;
