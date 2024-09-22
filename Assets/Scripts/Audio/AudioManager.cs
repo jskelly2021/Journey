@@ -1,19 +1,27 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    private AudioManager instance;
+    private static AudioManager instance;
     [SerializeField] private AudioSource audioSourcePrefab;
 
-    public AudioManager Instace { get { return instance; } }
+    private List<AudioSource> audioSourcePool;
+    [SerializeField] private int audioSourcePoolSize = 10;
+
+    public static AudioManager Instance { get { return instance; } }
 
     private void Awake()
     {
         if (instance != null && instance != this)
+        {
             Destroy(this.gameObject);
-        else
-            instance = this;
+            return;
+        }
+        
+        instance = this;
+        initAudioSourcePool();
     }
 
     private void OnEnable()
@@ -25,13 +33,41 @@ public class AudioManager : MonoBehaviour
         AudioEventManager.OnPlayAudio -= playAudio;
     }
 
+    private void initAudioSourcePool()
+    {
+        audioSourcePool = new List<AudioSource>();
+
+        for (int i = 0; i < audioSourcePoolSize; i++)
+        {
+            AudioSource audioSource = Instantiate(audioSourcePrefab);
+            audioSource.transform.parent = gameObject.transform;
+            audioSource.gameObject.SetActive(false);
+            audioSourcePool.Add(audioSource);
+        }
+    }
+
+    private AudioSource getAudioSource()
+    {
+        foreach (var audioSource in audioSourcePool)
+        {
+            if (!audioSource.isPlaying)
+                return audioSource;
+        }
+        return null;
+    }
+
+    private IEnumerator returnAudioSource(AudioSource audioSource)
+    {
+        yield return new WaitForSeconds(audioSource.clip.length);
+        audioSource.gameObject.SetActive(false);
+    }
+
     private void playAudio(AudioClip audioClip)
     {
-        Debug.Log("Playing audioClip");
-        AudioSource audioSource = Instantiate(audioSourcePrefab);
-        audioSource.transform.parent = gameObject.transform;
+        AudioSource audioSource = getAudioSource();
         audioSource.clip = audioClip;
+        audioSource.gameObject.SetActive(true);
         audioSource.Play();
-        Destroy(audioSource.gameObject, audioClip.length);
+        StartCoroutine(returnAudioSource(audioSource));
     }
 }
