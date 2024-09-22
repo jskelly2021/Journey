@@ -58,7 +58,11 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator returnAudioSource(AudioSource audioSource)
     {
-        yield return new WaitForSeconds(audioSource.clip.length);
+        while (audioSource.isPlaying)
+            yield return null;
+
+        audioSource.Stop();
+        audioSource.clip = null;
         audioSource.gameObject.SetActive(false);
     }
 
