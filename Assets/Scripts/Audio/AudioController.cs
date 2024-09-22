@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
-    
-    public void playSound()
+    [SerializeField] private AudioClip audioClip;
+
+    public void playAudioClip()
     {
-        audioSource.Play();
+        Debug.Log("Requesting to play audio");
+        AudioEventManager.playAudio(audioClip);
     }
 }
