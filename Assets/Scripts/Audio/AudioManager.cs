@@ -50,13 +50,17 @@ public class AudioManager : MonoBehaviour
         AudioEventManager.OnSetVolume -= setVolume;
     }
 
-    private void playMenuAudio(AudioClip audioClip) => playAudio(menuAudioPool, audioClip);
-    private void playGameAudio(AudioClip audioClip) => playAudio(gameAudioPool, audioClip);
-    private void playMusicAudio(AudioClip audioClip) => playAudio(musicAudioPool, audioClip);
+    private void playMenuAudio(AudioClip audioClip) => playAudio(menuAudioPool, audioClip, null);
+    private void playGameAudio(AudioClip audioClip, Transform position) => playAudio(gameAudioPool, audioClip, position);
+    private void playMusicAudio(AudioClip audioClip) => playAudio(musicAudioPool, audioClip, null);
 
-    private void playAudio(AudioPool audioPool, AudioClip audioClip)
+    private void playAudio(AudioPool audioPool, AudioClip audioClip, Transform spawnTransform)
     {
         AudioSource audioSource = audioPool.getAudioSource();
+
+        if (spawnTransform != null)
+            audioSource.transform.position = spawnTransform.position;
+
         audioSource.clip = audioClip;
         audioSource.gameObject.SetActive(true);
         audioSource.Play();

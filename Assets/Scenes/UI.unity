@@ -1402,8 +1402,12 @@ PrefabInstance:
       value: MusicVolumeSlider
       objectReference: {fileID: 0}
     - target: {fileID: 8929766318259982965, guid: 8e01e79c556080848b4dddf1c74a506d, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8929766318259982965, guid: 8e01e79c556080848b4dddf1c74a506d, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: setMusicFXVolume
+      value: setMusicVolume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
