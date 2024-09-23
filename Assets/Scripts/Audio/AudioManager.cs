@@ -8,9 +8,9 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
     [SerializeField] private AudioMixer audioMixer;
 
-    private List<AudioSource> menuAudioPool;
-    private List<AudioSource> gameAudioPool;
-    private List<AudioSource> musicAudioPool;
+    private AudioPool menuAudioPool;
+    private AudioPool gameAudioPool;
+    private AudioPool musicAudioPool;
 
     [SerializeField] private int menuAudioPoolSize = 3;
     [SerializeField] private int gameAudioPoolSize = 10;
@@ -31,9 +31,10 @@ public class AudioManager : MonoBehaviour
         }
         
         instance = this;
-        menuAudioPool = initAudioPool(menuAudioPoolSize, menuAudioPrefab);
-        gameAudioPool = initAudioPool(gameAudioPoolSize, gameAudioPrefab);
-        musicAudioPool = initAudioPool(musicAudioPoolSize, musicAudioPrefab);
+
+        menuAudioPool = new AudioPool(menuAudioPoolSize, menuAudioPrefab, gameObject.transform);
+        gameAudioPool = new AudioPool(gameAudioPoolSize, gameAudioPrefab, gameObject.transform);
+        musicAudioPool = new AudioPool(musicAudioPoolSize, musicAudioPrefab, gameObject.transform);
     }
 
     private void OnEnable()
@@ -49,49 +50,15 @@ public class AudioManager : MonoBehaviour
 
     private void playAudio(AudioClip audioClip)
     {
-        AudioSource audioSource = getAudioSource();
+        AudioSource audioSource = menuAudioPool.getAudioSource();
         audioSource.clip = audioClip;
         audioSource.gameObject.SetActive(true);
         audioSource.Play();
-        StartCoroutine(returnAudioSource(audioSource));
+        StartCoroutine(menuAudioPool.returnAudioSource(audioSource));
     }
 
     private void setVolume(string audioGroup, float volumeLevel)
     {
         audioMixer.SetFloat(audioGroup, Mathf.Log10(volumeLevel) * 20f);
-    }
-
-    private List<AudioSource> initAudioPool(int audioPoolSize, AudioSource audioPrefab)
-    {
-        List<AudioSource> audioPool = new List<AudioSource>();
-
-        for (int i = 0; i < audioPoolSize; i++)
-        {
-            AudioSource audioSource = Instantiate(audioPrefab);
-            audioSource.transform.parent = gameObject.transform;
-            audioSource.gameObject.SetActive(false);
-            audioPool.Add(audioSource);
-        }
-        return audioPool;
-    }
-
-    private AudioSource getAudioSource()
-    {
-        foreach (var audioSource in menuAudioPool)
-        {
-            if (!audioSource.isPlaying)
-                return audioSource;
-        }
-        return null;
-    }
-
-    private IEnumerator returnAudioSource(AudioSource audioSource)
-    {
-        while (audioSource.isPlaying)
-            yield return null;
-
-        audioSource.Stop();
-        audioSource.clip = null;
-        audioSource.gameObject.SetActive(false);
     }
 }
