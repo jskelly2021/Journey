@@ -125,7 +125,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -7842066632026711724}
         m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
-        m_MethodName: playAudioClip
+        m_MethodName: playMenuAudioClip
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

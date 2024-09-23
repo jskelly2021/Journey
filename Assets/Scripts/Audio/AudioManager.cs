@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -39,22 +37,30 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        AudioEventManager.OnPlayAudio += playAudio;
+        AudioEventManager.OnPlayMenuAudio += playMenuAudio;
+        AudioEventManager.OnPlayGameAudio += playGameAudio;
+        AudioEventManager.OnPlayMusicAudio += playMusicAudio;
         AudioEventManager.OnSetVolume += setVolume;
     }
     private void OnDisable()
     {
-        AudioEventManager.OnPlayAudio -= playAudio;
+        AudioEventManager.OnPlayMenuAudio -= playMenuAudio;
+        AudioEventManager.OnPlayGameAudio -= playGameAudio;
+        AudioEventManager.OnPlayMusicAudio -= playMusicAudio;
         AudioEventManager.OnSetVolume -= setVolume;
     }
 
-    private void playAudio(AudioClip audioClip)
+    private void playMenuAudio(AudioClip audioClip) => playAudio(menuAudioPool, audioClip);
+    private void playGameAudio(AudioClip audioClip) => playAudio(gameAudioPool, audioClip);
+    private void playMusicAudio(AudioClip audioClip) => playAudio(musicAudioPool, audioClip);
+
+    private void playAudio(AudioPool audioPool, AudioClip audioClip)
     {
-        AudioSource audioSource = menuAudioPool.getAudioSource();
+        AudioSource audioSource = audioPool.getAudioSource();
         audioSource.clip = audioClip;
         audioSource.gameObject.SetActive(true);
         audioSource.Play();
-        StartCoroutine(menuAudioPool.returnAudioSource(audioSource));
+        StartCoroutine(audioPool.returnAudioSource(audioSource));
     }
 
     private void setVolume(string audioGroup, float volumeLevel)
