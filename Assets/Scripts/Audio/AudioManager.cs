@@ -32,6 +32,8 @@ public class AudioManager : MonoBehaviour
         
         instance = this;
         menuAudioPool = initAudioPool(menuAudioPoolSize, menuAudioPrefab);
+        gameAudioPool = initAudioPool(gameAudioPoolSize, gameAudioPrefab);
+        musicAudioPool = initAudioPool(musicAudioPoolSize, musicAudioPrefab);
     }
 
     private void OnEnable()
