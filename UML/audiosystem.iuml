@@ -1,0 +1,52 @@
+@startuml inputsystem
+class AudioManager {
+    {static} +Instance
+    -audioMixer
+    ---
+    -playAudio()
+    -setVolume()
+    --Object Pooling--
+    ..Pools..
+    -menuAudioPool
+    -gameAudioPool
+    -musicAudioPool
+    ..Pool Sizes..
+    -menuAudioPoolSize
+    -gameAudioPoolSize
+    -musicAudioPoolSize
+    ..Audio Prefabs..
+    -menuAudioPrefab
+    -gameAudioPrefab
+    -musicAudioPrefab
+    ..Helpers..
+    -initAudioPool()
+    -getAudioFromPool()
+    -returnAudioToPool()
+}
+
+class AudioController {
+    -audioClip
+    +playAudioClip()
+    +setMasterVolume()
+    +setMusicVolume()
+    +setGameFXVolume()
+    +setMenuFXVolume()
+}
+
+class AudioEventManager {
+    ..Events..
+    {static} +OnPlayAudio
+    {static} +OnSetVolume
+    ---
+    ..Invokers..
+    {static} +playAudio()
+    {static} +setVolume()
+}
+
+entity GameObject
+
+AudioManager       "0..1"    .right.    "1..1"    AudioEventManager    : "Listens >"
+AudioController    "0..*"    .up.       "1..1"    AudioEventManager    : "Invokes >"
+AudioController    "0..1"    -right-    "0..*"    GameObject           : "Has <"
+
+@enduml
