@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class AudioManager : MonoBehaviour
 
     private List<AudioSource> audioSourcePool;
     [SerializeField] private int audioSourcePoolSize = 10;
+
+    [SerializeField] private AudioMixer audioMixer;
 
     public static AudioManager Instance { get { return instance; } }
 
@@ -27,10 +30,26 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         AudioEventManager.OnPlayAudio += playAudio;
+        AudioEventManager.OnSetVolume += setVolume;
     }
     private void OnDisable()
     {
         AudioEventManager.OnPlayAudio -= playAudio;
+        AudioEventManager.OnSetVolume -= setVolume;
+    }
+
+    private void playAudio(AudioClip audioClip)
+    {
+        AudioSource audioSource = getAudioSource();
+        audioSource.clip = audioClip;
+        audioSource.gameObject.SetActive(true);
+        audioSource.Play();
+        StartCoroutine(returnAudioSource(audioSource));
+    }
+
+    private void setVolume(string audioGroup, float volumeLevel)
+    {
+        audioMixer.SetFloat(audioGroup, volumeLevel);
     }
 
     private void initAudioSourcePool()
@@ -66,12 +85,4 @@ public class AudioManager : MonoBehaviour
         audioSource.gameObject.SetActive(false);
     }
 
-    private void playAudio(AudioClip audioClip)
-    {
-        AudioSource audioSource = getAudioSource();
-        audioSource.clip = audioClip;
-        audioSource.gameObject.SetActive(true);
-        audioSource.Play();
-        StartCoroutine(returnAudioSource(audioSource));
-    }
 }

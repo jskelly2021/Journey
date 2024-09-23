@@ -406,6 +406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourcePrefab: {fileID: 6554627151954243618, guid: 9bc99c4cadcbe0d44b1d720ceb9aab1e, type: 3}
+  audioSourcePoolSize: 10
+  audioMixer: {fileID: 24100000, guid: 10dce677ef0105a45a6c263aee1c6231, type: 2}
 --- !u!4 &1482711041
 Transform:
   m_ObjectHideFlags: 0

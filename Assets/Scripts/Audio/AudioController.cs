@@ -4,9 +4,6 @@ public class AudioController : MonoBehaviour
 {
     [SerializeField] private AudioClip audioClip;
 
-    public void playAudioClip()
-    {
-        Debug.Log("Requesting to play audio");
-        AudioEventManager.playAudio(audioClip);
-    }
+    public void playAudioClip() => AudioEventManager.playAudio(audioClip);
+    public void setMasterVolume(float volumeLevel) => AudioEventManager.setVolume("MasterVolume", volumeLevel);
 }
