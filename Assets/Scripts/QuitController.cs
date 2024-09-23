@@ -5,8 +5,5 @@ public class QuitController : MonoBehaviour
 {
     public static event Action QuitGame;
 
-    public void quitGame()
-    {
-        QuitGame?.Invoke();
-    }
+    public void quitGame() => QuitGame?.Invoke();
 }
