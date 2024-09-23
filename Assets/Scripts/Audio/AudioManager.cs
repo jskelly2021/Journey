@@ -49,7 +49,7 @@ public class AudioManager : MonoBehaviour
 
     private void setVolume(string audioGroup, float volumeLevel)
     {
-        audioMixer.SetFloat(audioGroup, volumeLevel);
+        audioMixer.SetFloat(audioGroup, Mathf.Log10(volumeLevel) * 20f);
     }
 
     private void initAudioSourcePool()
