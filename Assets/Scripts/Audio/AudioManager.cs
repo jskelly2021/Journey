@@ -6,12 +6,19 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     private static AudioManager instance;
-    [SerializeField] private AudioSource audioSourcePrefab;
-
-    private List<AudioSource> audioSourcePool;
-    [SerializeField] private int audioSourcePoolSize = 10;
-
     [SerializeField] private AudioMixer audioMixer;
+
+    private List<AudioSource> menuAudioPool;
+    private List<AudioSource> gameAudioPool;
+    private List<AudioSource> musicAudioPool;
+
+    [SerializeField] private int menuAudioPoolSize = 3;
+    [SerializeField] private int gameAudioPoolSize = 10;
+    [SerializeField] private int musicAudioPoolSize = 1;
+
+    [SerializeField] private AudioSource menuAudioPrefab;
+    [SerializeField] private AudioSource gameAudioPrefab;
+    [SerializeField] private AudioSource musicAudioPrefab;
 
     public static AudioManager Instance { get { return instance; } }
 
@@ -24,7 +31,7 @@ public class AudioManager : MonoBehaviour
         }
         
         instance = this;
-        initAudioSourcePool();
+        menuAudioPool = initAudioPool(menuAudioPoolSize, menuAudioPrefab);
     }
 
     private void OnEnable()
@@ -52,22 +59,23 @@ public class AudioManager : MonoBehaviour
         audioMixer.SetFloat(audioGroup, Mathf.Log10(volumeLevel) * 20f);
     }
 
-    private void initAudioSourcePool()
+    private List<AudioSource> initAudioPool(int audioPoolSize, AudioSource audioPrefab)
     {
-        audioSourcePool = new List<AudioSource>();
+        List<AudioSource> audioPool = new List<AudioSource>();
 
-        for (int i = 0; i < audioSourcePoolSize; i++)
+        for (int i = 0; i < audioPoolSize; i++)
         {
-            AudioSource audioSource = Instantiate(audioSourcePrefab);
+            AudioSource audioSource = Instantiate(audioPrefab);
             audioSource.transform.parent = gameObject.transform;
             audioSource.gameObject.SetActive(false);
-            audioSourcePool.Add(audioSource);
+            audioPool.Add(audioSource);
         }
+        return audioPool;
     }
 
     private AudioSource getAudioSource()
     {
-        foreach (var audioSource in audioSourcePool)
+        foreach (var audioSource in menuAudioPool)
         {
             if (!audioSource.isPlaying)
                 return audioSource;

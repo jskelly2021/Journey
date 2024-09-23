@@ -405,9 +405,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f850d1d93fb4f447b2bc097492b2510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSourcePrefab: {fileID: 6554627151954243618, guid: 9bc99c4cadcbe0d44b1d720ceb9aab1e, type: 3}
-  audioSourcePoolSize: 10
   audioMixer: {fileID: 24100000, guid: 10dce677ef0105a45a6c263aee1c6231, type: 2}
+  menuAudioPoolSize: 3
+  gameAudioPoolSize: 10
+  musicAudioPoolSize: 1
+  menuAudioPrefab: {fileID: 6554627151954243618, guid: 9bc99c4cadcbe0d44b1d720ceb9aab1e, type: 3}
+  gameAudioPrefab: {fileID: 6554627151954243618, guid: 3576ba91d08714245abd4f216a7a654f, type: 3}
+  musicAudioPrefab: {fileID: 6554627151954243618, guid: 9382d37cd63635942b76123d04d9c80b, type: 3}
 --- !u!4 &1482711041
 Transform:
   m_ObjectHideFlags: 0
