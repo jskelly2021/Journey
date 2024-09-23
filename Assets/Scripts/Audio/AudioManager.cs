@@ -30,9 +30,9 @@ public class AudioManager : MonoBehaviour
         
         instance = this;
 
-        menuAudioPool = new AudioPool(menuAudioPoolSize, menuAudioPrefab, gameObject.transform);
-        gameAudioPool = new AudioPool(gameAudioPoolSize, gameAudioPrefab, gameObject.transform);
-        musicAudioPool = new AudioPool(musicAudioPoolSize, musicAudioPrefab, gameObject.transform);
+        menuAudioPool = new AudioPool(menuAudioPoolSize, menuAudioPrefab, new GameObject("MenuAudioPool").transform);
+        gameAudioPool = new AudioPool(gameAudioPoolSize, gameAudioPrefab, new GameObject("GameAudioPool").transform);
+        musicAudioPool = new AudioPool(musicAudioPoolSize, musicAudioPrefab, new GameObject("MusicAudioPool").transform);
     }
 
     private void OnEnable()
