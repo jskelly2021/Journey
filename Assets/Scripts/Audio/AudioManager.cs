@@ -37,22 +37,14 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        AudioEventManager.OnPlayMenuAudio += playMenuAudio;
-        AudioEventManager.OnPlayGameAudio += playGameAudio;
-        AudioEventManager.OnPlayMusicAudio += playMusicAudio;
+        AudioEventManager.OnPlayAudio += playAudio;
         AudioEventManager.OnSetVolume += setVolume;
     }
     private void OnDisable()
     {
-        AudioEventManager.OnPlayMenuAudio -= playMenuAudio;
-        AudioEventManager.OnPlayGameAudio -= playGameAudio;
-        AudioEventManager.OnPlayMusicAudio -= playMusicAudio;
+        AudioEventManager.OnPlayAudio -= playAudio;
         AudioEventManager.OnSetVolume -= setVolume;
     }
-
-    private void playMenuAudio(AudioClip audioClip) => playAudio(AudioGroup.Menu, audioClip, null);
-    private void playGameAudio(AudioClip audioClip, Transform position) => playAudio(AudioGroup.Game, audioClip, position);
-    private void playMusicAudio(AudioClip audioClip) => playAudio(AudioGroup.Music, audioClip, null);
 
     private void playAudio(AudioGroup audioGroup, AudioClip audioClip, Transform spawnTransform)
     {
@@ -84,8 +76,28 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(audioPool.returnAudioSource(audioSource));
     }
 
-    private void setVolume(string audioGroup, float volumeLevel)
+    private void setVolume(AudioGroup audioGroup, float volumeLevel)
     {
-        audioMixer.SetFloat(audioGroup, Mathf.Log10(volumeLevel) * 20f);
+        string strAudioGroup;
+
+        switch (audioGroup)
+        {
+            case AudioGroup.Master:
+                strAudioGroup = "MasterVolume";
+                break;
+            case AudioGroup.Menu:
+                strAudioGroup = "MenuFXVolume";
+                break;
+            case AudioGroup.Game:
+                strAudioGroup = "GameFXVolume";
+                break;
+            case AudioGroup.Music:
+                strAudioGroup = "MusicVolume";
+                break;
+            default:
+                return;
+        }
+
+        audioMixer.SetFloat(strAudioGroup, Mathf.Log10(volumeLevel) * 20f);
     }
 }
