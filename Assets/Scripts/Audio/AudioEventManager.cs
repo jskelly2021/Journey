@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class AudioEventManager
+public static class AudioEventManager
 {
     public static event Action<AudioClip> OnPlayMenuAudio;
     public static event Action<AudioClip, Transform> OnPlayGameAudio;
