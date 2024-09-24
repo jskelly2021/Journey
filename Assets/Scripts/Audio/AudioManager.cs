@@ -67,6 +67,9 @@ public class AudioManager : MonoBehaviour
 
         AudioSource audioSource = audioPool.getAudioSource();
 
+        if (audioSource == null) 
+            return;
+
         if (spawnTransform != null)
             audioSource.transform.position = spawnTransform.position;
 
