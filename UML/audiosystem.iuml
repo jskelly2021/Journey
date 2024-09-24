@@ -18,10 +18,16 @@ class AudioManager {
     -menuAudioPrefab
     -gameAudioPrefab
     -musicAudioPrefab
-    ..Helpers..
-    -initAudioPool()
-    -getAudioFromPool()
-    -returnAudioToPool()
+}
+
+class AudioPool {
+    -audioSources
+    -audioPoolSize
+    -audioPrefab
+    +AudioPool()
+    +initAudioPool()
+    +getAudioFromPool()
+    +returnAudioToPool()
 }
 
 class AudioController {
@@ -45,7 +51,8 @@ class AudioEventManager {
 
 entity GameObject
 
-AudioManager       "0..1"    .right.    "1..1"    AudioEventManager    : "Listens >"
+AudioManager       "1..1"    .right.    "1..1"    AudioEventManager    : "Listens >"
+AudioManager       "1..1"    .down.     "0..*"    AudioPool            : "Has >"
 AudioController    "0..*"    .up.       "1..1"    AudioEventManager    : "Invokes >"
 AudioController    "0..1"    -right-    "0..*"    GameObject           : "Has <"
 
