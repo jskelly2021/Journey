@@ -12,6 +12,6 @@ public class MainMenuController : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        AudioEventManager.stopAllAudioInGroup(AudioGroup.Music);
     }
 }

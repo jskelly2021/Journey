@@ -28,7 +28,7 @@ public class AudioPool
         }
     }
 
-    public AudioSource getAudioSource()
+    public AudioSource getAvailableAudioSource()
     {
         foreach (var audioSource in audioSources)
         {
@@ -38,13 +38,52 @@ public class AudioPool
         return null;
     }
 
-    public IEnumerator returnAudioSource(AudioSource audioSource)
+    public AudioSource getActiveAudioSource(AudioClip audioClip, Transform location)
     {
-        while (audioSource.isPlaying)
-            yield return null;
+        if (audioClip == null)
+            return null;
+
+        foreach (var audioSource in audioSources)
+        {
+            if (!audioSource.isPlaying)
+                continue;
+
+            if (audioSource.clip == audioClip)
+                return audioSource;
+
+        }
+        return null;
+    }
+
+    public void returnAudioSource(AudioClip audioClip, Transform location)
+    {
+        returnAudioSource(getActiveAudioSource(audioClip, location));
+    }
+
+    public void returnAudioSource(AudioSource audioSource)
+    {
+        if (audioSource == null)
+            return;
 
         audioSource.Stop();
         audioSource.clip = null;
         audioSource.gameObject.SetActive(false);
+    }
+
+    public void stopAllSources()
+    {
+        foreach (var audioSource in audioSources)
+        {
+            if (audioSource.isPlaying)
+                returnAudioSource(audioSource);
+        }
+    }
+
+    public IEnumerator returnAudioSourceWhenFinished(AudioSource audioSource)
+    {
+        while (audioSource.isPlaying)
+            yield return null;
+
+        returnAudioSource(audioSource);
     }
 }

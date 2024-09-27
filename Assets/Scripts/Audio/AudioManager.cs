@@ -38,11 +38,15 @@ public class AudioManager : MonoBehaviour
     private void OnEnable()
     {
         AudioEventManager.OnPlayAudio += playAudio;
+        AudioEventManager.OnStopAudioClip += stopAudioClip;
+        AudioEventManager.OnStopAllAudio += stopAllAudioInGroup;
         AudioEventManager.OnSetVolume += setVolume;
     }
     private void OnDisable()
     {
         AudioEventManager.OnPlayAudio -= playAudio;
+        AudioEventManager.OnStopAudioClip -= stopAudioClip;
+        AudioEventManager.OnStopAllAudio -= stopAllAudioInGroup;
         AudioEventManager.OnSetVolume -= setVolume;
     }
 
@@ -50,7 +54,7 @@ public class AudioManager : MonoBehaviour
     {
         AudioPool audioPool = getAudioGroupPool(audioGroup);
 
-        AudioSource audioSource = audioPool.getAudioSource();
+        AudioSource audioSource = audioPool.getAvailableAudioSource();
 
         if (audioSource == null) 
             return;
@@ -61,28 +65,22 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = audioClip;
         audioSource.gameObject.SetActive(true);
         audioSource.Play();
-        StartCoroutine(audioPool.returnAudioSource(audioSource));
+        StartCoroutine(audioPool.returnAudioSourceWhenFinished(audioSource));
     }
 
-    private void stopAudioClipInAudioGroup(AudioGroup audioGroup, AudioClip audioClip, Transform location)
+    private void stopAudioClip(AudioGroup audioGroup, AudioClip audioClip, Transform location)
     {
-        if (audioClip == null)
-            return;
-        
+        getAudioGroupPool(audioGroup).returnAudioSource(audioClip, location);
     }
 
-    private void stopAllAudioInAudioGroup(AudioGroup audioGroup, AudioClip audioClip, Transform location)
+    private void stopAllAudioInGroup(AudioGroup audioGroup)
     {
+        getAudioGroupPool(audioGroup).stopAllSources();
     }
 
     private void setVolume(AudioGroup audioGroup, float volumeLevel)
     {
-        string audioGroupVolumeStr = audioGroup.GetVolumeString();
-
-        if (audioGroupVolumeStr == null)
-            return;
-
-        audioMixer.SetFloat(audioGroupVolumeStr, Mathf.Log10(volumeLevel) * 20f);
+        audioMixer.SetFloat(audioGroup.GetVolumeString(), Mathf.Log10(volumeLevel) * 20f);
     }
 
     private AudioPool getAudioGroupPool(AudioGroup audioGroup)
