@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
@@ -7,5 +8,10 @@ public class MainMenuController : MonoBehaviour
     private void OnEnable()
     {
         AudioEventManager.playAudio(AudioGroup.Music, audioClip, null);
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }

@@ -48,22 +48,7 @@ public class AudioManager : MonoBehaviour
 
     private void playAudio(AudioGroup audioGroup, AudioClip audioClip, Transform spawnTransform)
     {
-        AudioPool audioPool;
-
-        switch (audioGroup)
-        {
-            case AudioGroup.Menu:
-                audioPool = menuAudioPool;
-                break;
-            case AudioGroup.Game:
-                audioPool = gameAudioPool;
-                break;
-            case AudioGroup.Music:
-                audioPool = musicAudioPool;
-                break;
-            default:
-                return;
-        }
+        AudioPool audioPool = getAudioGroupPool(audioGroup);
 
         AudioSource audioSource = audioPool.getAudioSource();
 
@@ -79,28 +64,39 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(audioPool.returnAudioSource(audioSource));
     }
 
+    private void stopAudioClipInAudioGroup(AudioGroup audioGroup, AudioClip audioClip, Transform location)
+    {
+        if (audioClip == null)
+            return;
+        
+    }
+
+    private void stopAllAudioInAudioGroup(AudioGroup audioGroup, AudioClip audioClip, Transform location)
+    {
+    }
+
     private void setVolume(AudioGroup audioGroup, float volumeLevel)
     {
-        string strAudioGroup;
+        string audioGroupVolumeStr = audioGroup.GetVolumeString();
 
+        if (audioGroupVolumeStr == null)
+            return;
+
+        audioMixer.SetFloat(audioGroupVolumeStr, Mathf.Log10(volumeLevel) * 20f);
+    }
+
+    private AudioPool getAudioGroupPool(AudioGroup audioGroup)
+    {
         switch (audioGroup)
         {
-            case AudioGroup.Master:
-                strAudioGroup = "MasterVolume";
-                break;
             case AudioGroup.Menu:
-                strAudioGroup = "MenuFXVolume";
-                break;
+                return menuAudioPool;
             case AudioGroup.Game:
-                strAudioGroup = "GameFXVolume";
-                break;
+                return gameAudioPool;
             case AudioGroup.Music:
-                strAudioGroup = "MusicVolume";
-                break;
+                return musicAudioPool;
             default:
-                return;
+                return null;
         }
-
-        audioMixer.SetFloat(strAudioGroup, Mathf.Log10(volumeLevel) * 20f);
     }
 }
