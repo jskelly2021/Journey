@@ -45,12 +45,11 @@ public class AudioPool
 
         foreach (var audioSource in audioSources)
         {
-            if (!audioSource.isPlaying)
-                continue;
-
-            if (audioSource.clip == audioClip)
-                return audioSource;
-
+            if (audioSource.isPlaying && audioSource.clip == audioClip)
+            {
+                if (location == null || audioSource.transform.position == location.position)
+                    return audioSource;
+            }
         }
         return null;
     }

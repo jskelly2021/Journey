@@ -56,8 +56,11 @@ public class AudioManager : MonoBehaviour
 
         AudioSource audioSource = audioPool.getAvailableAudioSource();
 
-        if (audioSource == null) 
+        if (audioSource == null)
+        {
+            Debug.Log("An audio source was not available");
             return;
+        }
 
         if (spawnTransform != null)
             audioSource.transform.position = spawnTransform.position;
