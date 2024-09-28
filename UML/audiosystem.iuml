@@ -4,7 +4,10 @@ class AudioManager {
     -audioMixer
     ---
     -playAudio()
+    -stopAudioClip()
+    -stopAllAudioInGroup()
     -setVolume()
+    -getAudioGroupPool()
     --Object Pooling--
     ..Pools..
     -menuAudioPool
@@ -24,15 +27,21 @@ class AudioPool {
     -audioSources
     -audioPoolSize
     -audioPrefab
-    +AudioPool()
-    +initAudioPool()
-    +getAudioFromPool()
+    -parentTransform
+    -initAudioPool()
+    +getAvailableAudioSource()
+    +getActiveAudioSource()
     +returnAudioToPool()
+    +returnAudioSource()
+    +returnAllSources()
+    +returnAudioSourceWhenFinished()
 }
 
 class AudioController {
     -audioClip
-    +playAudioClip()
+    +playMenuAudioClip()
+    +playGameAudioClip()
+    +playMusicAudioClip()
     +setMasterVolume()
     +setMusicVolume()
     +setGameFXVolume()
@@ -43,10 +52,14 @@ class AudioEventManager {
     ..Events..
     {static} +OnPlayAudio
     {static} +OnSetVolume
+    {static} +OnStopAudioClip
+    {static} +OnStopAllAudio
     ---
     ..Invokers..
     {static} +playAudio()
     {static} +setVolume()
+    {static} +stopAudioClip()
+    {static} +stopAllAudioInGroup()
 }
 
 entity GameObject

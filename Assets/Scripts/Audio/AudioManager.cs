@@ -78,7 +78,7 @@ public class AudioManager : MonoBehaviour
 
     private void stopAllAudioInGroup(AudioGroup audioGroup)
     {
-        getAudioGroupPool(audioGroup).stopAllSources();
+        getAudioGroupPool(audioGroup).returnAllSources();
     }
 
     private void setVolume(AudioGroup audioGroup, float volumeLevel)

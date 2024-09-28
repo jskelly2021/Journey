@@ -69,7 +69,7 @@ public class AudioPool
         audioSource.gameObject.SetActive(false);
     }
 
-    public void stopAllSources()
+    public void returnAllSources()
     {
         foreach (var audioSource in audioSources)
         {
