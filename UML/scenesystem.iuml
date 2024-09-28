@@ -9,6 +9,12 @@ class SceneLoader {
 }
 
 class SceneController {
+    +loadScene()
+    +unloadScene()
+    +setSceneActive()
+}
+
+class AudioEventManager {
     ..Events..
     {static} +LoadScene
     {static} +UnloadScene
@@ -21,6 +27,7 @@ class SceneController {
 
 entity GameObject
 
-SceneLoader       "1..1 "   ..{       "0..*   "  SceneController   : " Listens >"
-SceneController   "0..1"    -right-   "0..*"     GameObject        : " Has <"
+SceneLoader       "1..1 "   .right.    "1..1"     AudioEventManager   : " Listens >"
+SceneController   "0..*"    .up.       "1..1"     AudioEventManager   : " Invokes >"
+SceneController   "0..*"    -left-     "0..*"     GameObject          : " Has <"
 @enduml
