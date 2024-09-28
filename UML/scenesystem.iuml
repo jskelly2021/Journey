@@ -19,11 +19,8 @@ class SceneController {
     +setSceneActive()
 }
 
-entity GameObject {
+entity GameObject
 
-}
-
-SceneLoader "1..1 " ..{ "0..* " SceneController : " Listens >"
-SceneController "0..1" -right- "0..*" GameObject : " Has <"
-
+SceneLoader       "1..1 "   ..{       "0..*   "  SceneController   : " Listens >"
+SceneController   "0..1"    -right-   "0..*"     GameObject        : " Has <"
 @enduml

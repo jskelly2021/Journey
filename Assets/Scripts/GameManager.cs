@@ -17,23 +17,23 @@ public sealed class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        InputHandler.PauseAction += PauseGame;
-        InputHandler.ResumeAction += ResumeGame;
+        InputHandler.PauseAction += pauseGame;
+        InputHandler.ResumeAction += resumeGame;
         QuitController.QuitGame += quit;
     }
     private void OnDisable()
     {
-        InputHandler.PauseAction -= PauseGame;
-        InputHandler.ResumeAction -= ResumeGame;
+        InputHandler.PauseAction -= pauseGame;
+        InputHandler.ResumeAction -= resumeGame;
         QuitController.QuitGame -= quit;
     }
 
-    private void PauseGame()
+    private void pauseGame()
     {
         Time.timeScale = 0.0f;
     }
 
-    private void ResumeGame()
+    private void resumeGame()
     {
         Time.timeScale = 1.0f;
     }
