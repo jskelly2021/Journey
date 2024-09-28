@@ -7,13 +7,17 @@ class InputManager {
     -disableActionMap()
 }
 
-abstract InputHandler {
+class InputEventManager {
     ..Events..
     {static} +PauseAction
     {static} +ResumeAction
+    {static} +EnableActionMap
+    {static} +DisableActionMap
     --Invokers--
-    #pause()
-    #resume()
+    +pause()
+    +resume()
+    +enableActionMap()
+    +disableActionMap()
 }
 
 class PlayerInputHandler {
@@ -29,10 +33,6 @@ class PlayerInputAction {
 }
 
 class InputController {
-    ..Events..
-    {static} +EnableActionMap
-    {static} +DisableActionMap
-    --Invokers--
     +enableActionMap()
     +disableActionMap()
 }
@@ -47,16 +47,16 @@ class GameManager {
     -quitGame()
 }
 
-InputManager        "1..1"       .down.   "0..*"       InputController      : "Listens >"
-InputController     "0..1"       -down-    "0..*"       GameObject           : "Has <"
 
-InputManager        "1..1"       .left.    "0..1"       InputHandler         : "Listens >"
-InputHandler        "1..1   "    .down.    "1..1"       PlayerInputHandler   : "Inherits >"
-InputHandler        "1..1"       .down.    "1..1  "     PausedInputHandler   : "Inherits >"
+InputManager        "1..1    "   .up.    "1..1  "      InputEventManager    : "Listens >"
+PlayerInputHandler  "1..1"       .up.    "1..1  "      InputEventManager    : "Invokes >"
+PausedInputHandler  "1..1 "      .up.    "1..1"        InputEventManager    : "Invokes >"
 
-InputManager        "1..1 "      -down-    "1..1"       PlayerInputAction    : "Has >"
-PlayerInputHandler  "1..1"       -down-    "1..1    "   PlayerInputAction    : "Listens >"
-PausedInputHandler  "1..1"       -down-    "1..1"       PlayerInputAction    : "Listens >"
+InputManager        "1..1    "   -down-   "1..1"       PlayerInputAction    : "Has >"
+PlayerInputHandler  "1..1"       .down.   "1..1    "   PlayerInputAction    : "Listens >"
+PausedInputHandler  "1..1"       .down.   "1..1"       PlayerInputAction    : "Listens >"
 
-GameManager         "1..1  "     .right.   "1..1"       InputHandler         : "Listens >"
+InputController     "0..*"       .right.  "1..1"       InputEventManager    : "Invokes >"
+InputController     "0..*"       -down-   "0..*"       GameObject           : "Has <"
+GameManager         "1..1"       .left.   "1..1"       InputEventManager    : "Listens >"
 @enduml
