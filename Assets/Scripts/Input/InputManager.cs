@@ -16,6 +16,8 @@ public class InputManager : MonoBehaviour
             instance = this;
 
         playerInput = new PlayerInputAction();
+
+        new PlayerInputHandler(playerInput);
     }
 
     private void Start()

@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : MonoBehaviour, PlayerInputAction.IPlayerActions
+public class PlayerInputHandler : PlayerInputAction.IPlayerActions
 {
-    private void Start()
+    PlayerInputAction playerInput;
+
+    public PlayerInputHandler(PlayerInputAction playerInput)
     {
-        InputManager.Instance.PlayerInput.Player.SetCallbacks(this);
+        this.playerInput = playerInput;
+        playerInput.Player.SetCallbacks(this);
     }
 
     public void OnPause(InputAction.CallbackContext context)
@@ -15,7 +18,7 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInputAction.IPlayerAction
 
         GameStateEvents.SetGameState(GameStates.Pause);
 
-        InputManager.Instance.PlayerInput.Paused.Enable();
-        InputManager.Instance.PlayerInput.Player.Disable();
+        playerInput.Paused.Enable();
+        playerInput.Player.Disable();
     }
 }
