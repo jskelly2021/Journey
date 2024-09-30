@@ -17,11 +17,16 @@ public sealed class GameStateManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameStateEvents.OnSetGameState += handleGameState;
+        GameStateEvents.OnResumeGame += resumeGame;
+        GameStateEvents.OnPauseGame += pauseGame;
+        GameStateEvents.OnQuitGame += quitGame;
+
     }
     private void OnDisable()
     {
-        GameStateEvents.OnSetGameState -= handleGameState;
+        GameStateEvents.OnResumeGame -= resumeGame;
+        GameStateEvents.OnPauseGame -= pauseGame;
+        GameStateEvents.OnQuitGame -= quitGame;
     }
 
     private void resumeGame()
@@ -38,23 +43,5 @@ public sealed class GameStateManager : MonoBehaviour
     {
         Debug.Log("Quitting Game");
         Application.Quit();
-    }
-
-    private void handleGameState(GameStates gameState)
-    {
-        switch (gameState)
-        {
-            case GameStates.Play:
-                resumeGame();
-                break;
-            case GameStates.Pause:
-                pauseGame();
-                break;
-            case GameStates.Quit:
-                quitGame();
-                break;
-            default:
-                break;
-        }
     }
 }

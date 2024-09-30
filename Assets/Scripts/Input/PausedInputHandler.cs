@@ -1,6 +1,7 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PausedInputHandler : InputHandler, PlayerInputAction.IPausedActions
+public class PausedInputHandler : MonoBehaviour, PlayerInputAction.IPausedActions
 {
     private void Start()
     {
@@ -15,6 +16,6 @@ public class PausedInputHandler : InputHandler, PlayerInputAction.IPausedActions
         InputManager.Instance.PlayerInput.Paused.Disable();
         InputManager.Instance.PlayerInput.Player.Enable();
 
-        base.Resume();
+        GameStateEvents.SetGameState(GameStates.Play);
     }
 }

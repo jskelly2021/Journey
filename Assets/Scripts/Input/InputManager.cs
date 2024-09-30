@@ -27,17 +27,22 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         playerInput.Enable();
-        InputController.EnableActionMap += enableActionMap;
-        InputController.DisableActionMap += disableActionMap;
+        InputEvents.OnEnableActionMap += enableActionMap;
+        InputEvents.OnDisableActionMap += disableActionMap;
     }
 
     private void OnDisable()
     {
         playerInput.Disable();
-        InputController.EnableActionMap -= enableActionMap;
-        InputController.DisableActionMap -= disableActionMap;
+        InputEvents.OnEnableActionMap -= enableActionMap;
+        InputEvents.OnDisableActionMap -= disableActionMap;
    }
 
-    private void enableActionMap(string actionMap) => PlayerInput.asset.FindActionMap(actionMap).Enable();
+    private void enableActionMap(string actionMap)
+    {
+        Debug.Log("Enabling" + actionMap);
+        PlayerInput.asset.FindActionMap(actionMap).Enable();
+    } 
+    
     private void disableActionMap(string actionMap) => PlayerInput.asset.FindActionMap(actionMap).Disable();
 }

@@ -6,13 +6,13 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputHandler.PauseAction += enablePauseMenu;
-        InputHandler.ResumeAction += disablePauseMenu;
+        GameStateEvents.OnPauseGame += enablePauseMenu;
+        GameStateEvents.OnResumeGame += disablePauseMenu;
     }
     private void OnDisable()
     {
-        InputHandler.PauseAction -= disablePauseMenu;
-        InputHandler.ResumeAction -= disablePauseMenu;
+        GameStateEvents.OnPauseGame -= enablePauseMenu;
+        GameStateEvents.OnResumeGame -= disablePauseMenu;
     }
 
     private void enablePauseMenu() => pauseMenuCanvas.SetActive(true);

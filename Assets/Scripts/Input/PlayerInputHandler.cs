@@ -1,6 +1,7 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
+public class PlayerInputHandler : MonoBehaviour, PlayerInputAction.IPlayerActions
 {
     private void Start()
     {
@@ -12,9 +13,9 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        InputManager.Instance.PlayerInput.Player.Disable();
-        InputManager.Instance.PlayerInput.Paused.Enable();
+        GameStateEvents.SetGameState(GameStates.Pause);
 
-        base.Pause();
+        InputManager.Instance.PlayerInput.Paused.Enable();
+        InputManager.Instance.PlayerInput.Player.Disable();
     }
 }
