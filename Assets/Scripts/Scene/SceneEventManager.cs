@@ -1,8 +1,7 @@
 using Eflatun.SceneReference;
 using System;
-using UnityEngine;
 
-public class SceneEventManager : MonoBehaviour
+public class SceneEventManager
 {
     public static event Action<SceneReference> OnLoadScene;
     public static event Action<SceneReference> OnUnloadScene;
