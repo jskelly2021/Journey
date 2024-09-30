@@ -23,32 +23,23 @@ public class SceneLoader : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneController.LoadScene += loadScene;
-        SceneController.UnloadScene += unloadScene;
-        SceneController.SetSceneActive += setSceneActive;
+        SceneEventManager.OnLoadScene += loadScene;
+        SceneEventManager.OnUnloadScene += unloadScene;
+        SceneEventManager.OnSetSceneActive += setSceneActive;
     }
     private void OnDisable()
     {
-        SceneController.LoadScene -= loadScene;
-        SceneController.UnloadScene -= unloadScene;
-        SceneController.SetSceneActive -= setSceneActive;
+        SceneEventManager.OnLoadScene -= loadScene;
+        SceneEventManager.OnUnloadScene -= unloadScene;
+        SceneEventManager.OnSetSceneActive -= setSceneActive;
     }
 
-    /// <summary>
-    /// Asynchronously loads the scene referenced by <paramref name="sceneToLoad"/> if not already loaded.
-    /// </summary>
-    /// <param name="sceneToLoad"></param>
     private void loadScene(SceneReference sceneToLoad)
     {
         if (!SceneManager.GetSceneByPath(sceneToLoad.Path).IsValid())
             StartCoroutine(loadSceneAsync(sceneToLoad));
     }
 
-    /// <summary>
-    /// If scene referenced by <paramref name="sceneToSetActive"/> is loaded, sets it as the active scene. 
-    /// Otherwise, asynchronously loads the scene referenced by <paramref name="sceneToSetActive"/> and sets it as the active scene.
-    /// </summary>
-    /// <param name="sceneToSetActive"></param>
     private void setSceneActive(SceneReference sceneToSetActive)
     {
         if (!SceneManager.GetSceneByPath(sceneToSetActive.Path).IsValid())
@@ -57,11 +48,6 @@ public class SceneLoader : MonoBehaviour
             SceneManager.SetActiveScene(SceneManager.GetSceneByPath(sceneToSetActive.Path));
     }
 
-    /// <summary>
-    /// Aysnchronously unloads the scene referenced by <paramref name="sceneToUnload"/> only if it is not the active scene. 
-    /// Otherwise, waits until <paramref name="sceneToUnload"/> is not the active scene and then unloads it.
-    /// </summary>
-    /// <param name="sceneToUnload"></param>
     private void unloadScene(SceneReference sceneToUnload)
     {
         StartCoroutine(unloadSceneAsync(sceneToUnload));
