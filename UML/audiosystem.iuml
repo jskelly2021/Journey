@@ -23,6 +23,20 @@ class AudioManager {
     -musicAudioPrefab
 }
 
+class AudioEvents {
+    ..Events..
+    {static} +OnPlayAudio
+    {static} +OnSetVolume
+    {static} +OnStopAudioClip
+    {static} +OnStopAllAudio
+    ---
+    ..Invokers..
+    {static} +playAudio()
+    {static} +setVolume()
+    {static} +stopAudioClip()
+    {static} +stopAllAudioInGroup()
+}
+
 class AudioPool {
     -audioSources
     -audioPoolSize
@@ -48,25 +62,11 @@ class AudioController {
     +setMenuFXVolume()
 }
 
-class AudioEventManager {
-    ..Events..
-    {static} +OnPlayAudio
-    {static} +OnSetVolume
-    {static} +OnStopAudioClip
-    {static} +OnStopAllAudio
-    ---
-    ..Invokers..
-    {static} +playAudio()
-    {static} +setVolume()
-    {static} +stopAudioClip()
-    {static} +stopAllAudioInGroup()
-}
-
 entity GameObject
 
-AudioManager       "1..1"    .right.    "1..1"    AudioEventManager    : "Listens >"
-AudioManager       "1..1"    .down.     "0..*"    AudioPool            : "Has >"
-AudioController    "0..*"    .up.       "1..1"    AudioEventManager    : "Invokes >"
-AudioController    "0..1"    -right-    "0..*"    GameObject           : "Has <"
+AudioManager       "1..1"    .right.    "1..1"    AudioEvents    : "Listens >"
+AudioManager       "1..1"    .down.     "0..*"    AudioPool      : "Has >"
+AudioController    "0..*"    .up.       "1..1"    AudioEvents    : "Invokes >"
+AudioController    "0..1"    -right-    "0..*"    GameObject     : "Has <"
 
 @enduml

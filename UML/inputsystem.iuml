@@ -1,23 +1,26 @@
 @startuml inputsystem
+
 class InputManager {
     {static} +Instance
-    +PlayerInput
+    -PlayerInput
+    -playerInputHandler
+    -pausedInputHandler
     --
     -enableActionMap()
     -disableActionMap()
 }
 
-class InputEventManager {
+class InputEvents {
     ..Events..
-    {static} +PauseAction
-    {static} +ResumeAction
-    {static} +EnableActionMap
-    {static} +DisableActionMap
+    {static} +OnEnableActionMap
+    {static} +OnDisableActionMap
     --Invokers--
-    +pause()
-    +resume()
-    +enableActionMap()
-    +disableActionMap()
+    {static} +EnableActionMap()
+    {static} +DisableActionMap()
+}
+
+abstract InputHandler {
+    #playerInput
 }
 
 class PlayerInputHandler {
@@ -28,35 +31,23 @@ class PausedInputHandler {
     +OnResume()
 }
 
-class PlayerInputAction {
-
-}
-
-class InputController {
+class InputMapController {
     +enableActionMap()
     +disableActionMap()
 }
 
+class PlayerInputAction
 entity GameObject
 
-class GameManager {
-    {static} +Instance
-    --
-    -pauseGame()
-    -resumeGame()
-    -quitGame()
-}
+InputManager        "1..1  "  .up.     "1..1"    InputEvents         : "Listens >"
+InputManager        "1..1"    -left-   "0..*"    InputHandler        : "Has >"
+InputManager        "1..1"    -down-   "1..1"    PlayerInputAction   : "Has >"
 
+InputHandler        "0..*"    .up.     "1..1  "  InputEvents         : "Invokes >"
+InputHandler        "1..1"    .down.   "1..1"    PlayerInputHandler  : "Inherits >"
+InputHandler        "1..1   " .down.   "1..1"    PausedInputHandler  : "Inherits >"
 
-InputManager        "1..1    "   .up.    "1..1  "      InputEventManager    : "Listens >"
-PlayerInputHandler  "1..1"       .up.    "1..1  "      InputEventManager    : "Invokes >"
-PausedInputHandler  "1..1 "      .up.    "1..1"        InputEventManager    : "Invokes >"
+InputMapController  "0..*"    .right.  "1..1"    InputEvents         : "Invokes >"
+InputMapController  "0..*"    -down-   "0..*"    GameObject          : "Has <"
 
-InputManager        "1..1    "   -down-   "1..1"       PlayerInputAction    : "Has >"
-PlayerInputHandler  "1..1"       .down.   "1..1    "   PlayerInputAction    : "Listens >"
-PausedInputHandler  "1..1"       .down.   "1..1"       PlayerInputAction    : "Listens >"
-
-InputController     "0..*"       .right.  "1..1"       InputEventManager    : "Invokes >"
-InputController     "0..*"       -down-   "0..*"       GameObject           : "Has <"
-GameManager         "1..1"       .left.   "1..1"       InputEventManager    : "Listens >"
 @enduml
