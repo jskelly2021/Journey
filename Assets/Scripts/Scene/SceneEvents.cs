@@ -7,7 +7,7 @@ public class SceneEvents
     public static event Action<SceneReference> OnUnloadScene;
     public static event Action<SceneReference> OnSetSceneActive;
 
-    public static void loadScene(SceneReference sceneRef) => OnLoadScene?.Invoke(sceneRef);
-    public static void unloadScene(SceneReference sceneRef) => OnUnloadScene?.Invoke(sceneRef);
-    public static void setSceneActive(SceneReference sceneRef) => OnSetSceneActive?.Invoke(sceneRef);
+    public static void LoadScene(SceneReference sceneRef) => OnLoadScene?.Invoke(sceneRef);
+    public static void UnloadScene(SceneReference sceneRef) => OnUnloadScene?.Invoke(sceneRef);
+    public static void SetSceneActive(SceneReference sceneRef) => OnSetSceneActive?.Invoke(sceneRef);
 }

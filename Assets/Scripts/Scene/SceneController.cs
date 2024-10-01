@@ -6,7 +6,7 @@ public class SceneController : MonoBehaviour
     [SerializeField] private SceneReference sceneToLoad;
     [SerializeField] private SceneReference sceneToUnload;
 
-    public void loadScene() => SceneEvents.loadScene(sceneToLoad);
-    public void unloadScene() => SceneEvents.unloadScene(sceneToUnload);
-    public void setSceneActive() => SceneEvents.loadScene(sceneToLoad);
+    public void loadScene() => SceneEvents.LoadScene(sceneToLoad);
+    public void unloadScene() => SceneEvents.UnloadScene(sceneToUnload);
+    public void setSceneActive() => SceneEvents.LoadScene(sceneToLoad);
 }
