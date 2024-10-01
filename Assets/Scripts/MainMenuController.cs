@@ -6,11 +6,11 @@ public class MainMenuController : MonoBehaviour
 
     private void OnEnable()
     {
-        AudioEventManager.playAudio(AudioGroup.Music, audioClip, null);
+        AudioEventManager.PlayAudio(AudioGroup.Music, audioClip, null);
     }
 
     private void OnDisable()
     {
-        AudioEventManager.stopAllAudioInGroup(AudioGroup.Music);
+        AudioEventManager.StopAllAudioInGroup(AudioGroup.Music);
     }
 }
