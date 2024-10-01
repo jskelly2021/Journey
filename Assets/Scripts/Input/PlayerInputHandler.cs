@@ -1,14 +1,10 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputHandler : PlayerInputAction.IPlayerActions
+public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
 {
-    PlayerInputAction playerInput;
-
-    public PlayerInputHandler(PlayerInputAction playerInput)
+    public PlayerInputHandler(PlayerInputAction playerInput) : base(playerInput)
     {
-        this.playerInput = playerInput;
-        playerInput.Player.SetCallbacks(this);
+        base.playerInput.Player.SetCallbacks(this);
     }
 
     public void OnPause(InputAction.CallbackContext context)

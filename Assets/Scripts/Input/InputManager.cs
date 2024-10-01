@@ -4,6 +4,9 @@ public class InputManager : MonoBehaviour
 {
     private static InputManager instance;
     private PlayerInputAction playerInput;
+    
+    private InputHandler playerInputHandler;
+    private InputHandler pausedInputHandler;
 
     public static InputManager Instance { get { return instance; } }
     public PlayerInputAction PlayerInput { get { return playerInput; } }
@@ -17,7 +20,8 @@ public class InputManager : MonoBehaviour
 
         playerInput = new PlayerInputAction();
 
-        new PlayerInputHandler(playerInput);
+        playerInputHandler = new PlayerInputHandler(playerInput);
+        pausedInputHandler = new PausedInputHandler(playerInput);
     }
 
     private void Start()

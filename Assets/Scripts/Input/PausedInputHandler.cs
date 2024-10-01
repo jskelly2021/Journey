@@ -1,11 +1,10 @@
-using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PausedInputHandler : MonoBehaviour, PlayerInputAction.IPausedActions
+public class PausedInputHandler : InputHandler, PlayerInputAction.IPausedActions
 {
-    private void Start()
+    public PausedInputHandler(PlayerInputAction playerInput) : base(playerInput)
     {
-        InputManager.Instance.PlayerInput.Paused.SetCallbacks(this);
+        playerInput.Paused.SetCallbacks(this);
     }
 
     public void OnResume(InputAction.CallbackContext context)
@@ -13,8 +12,8 @@ public class PausedInputHandler : MonoBehaviour, PlayerInputAction.IPausedAction
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        InputManager.Instance.PlayerInput.Paused.Disable();
-        InputManager.Instance.PlayerInput.Player.Enable();
+        playerInput.Paused.Disable();
+        playerInput.Player.Enable();
 
         GameStateEvents.SetGameState(GameStates.Play);
     }
