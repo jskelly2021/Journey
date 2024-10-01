@@ -23,15 +23,15 @@ public class SceneLoader : MonoBehaviour
 
     private void OnEnable()
     {
-        SceneEventManager.OnLoadScene += loadScene;
-        SceneEventManager.OnUnloadScene += unloadScene;
-        SceneEventManager.OnSetSceneActive += setSceneActive;
+        SceneEvents.OnLoadScene += loadScene;
+        SceneEvents.OnUnloadScene += unloadScene;
+        SceneEvents.OnSetSceneActive += setSceneActive;
     }
     private void OnDisable()
     {
-        SceneEventManager.OnLoadScene -= loadScene;
-        SceneEventManager.OnUnloadScene -= unloadScene;
-        SceneEventManager.OnSetSceneActive -= setSceneActive;
+        SceneEvents.OnLoadScene -= loadScene;
+        SceneEvents.OnUnloadScene -= unloadScene;
+        SceneEvents.OnSetSceneActive -= setSceneActive;
     }
 
     private void loadScene(SceneReference sceneToLoad)

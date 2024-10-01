@@ -1,7 +1,7 @@
 using Eflatun.SceneReference;
 using System;
 
-public class SceneEventManager
+public class SceneEvents
 {
     public static event Action<SceneReference> OnLoadScene;
     public static event Action<SceneReference> OnUnloadScene;

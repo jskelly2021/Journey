@@ -37,17 +37,17 @@ public class AudioManager : MonoBehaviour
 
     private void OnEnable()
     {
-        AudioEventManager.OnPlayAudio += playAudio;
-        AudioEventManager.OnStopAudioClip += stopAudioClip;
-        AudioEventManager.OnStopAllAudio += stopAllAudioInGroup;
-        AudioEventManager.OnSetVolume += setVolume;
+        AudioEvents.OnPlayAudio += playAudio;
+        AudioEvents.OnStopAudioClip += stopAudioClip;
+        AudioEvents.OnStopAllAudio += stopAllAudioInGroup;
+        AudioEvents.OnSetVolume += setVolume;
     }
     private void OnDisable()
     {
-        AudioEventManager.OnPlayAudio -= playAudio;
-        AudioEventManager.OnStopAudioClip -= stopAudioClip;
-        AudioEventManager.OnStopAllAudio -= stopAllAudioInGroup;
-        AudioEventManager.OnSetVolume -= setVolume;
+        AudioEvents.OnPlayAudio -= playAudio;
+        AudioEvents.OnStopAudioClip -= stopAudioClip;
+        AudioEvents.OnStopAllAudio -= stopAllAudioInGroup;
+        AudioEvents.OnSetVolume -= setVolume;
     }
 
     private void playAudio(AudioGroup audioGroup, AudioClip audioClip, Transform spawnTransform)
