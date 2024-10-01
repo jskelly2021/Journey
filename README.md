@@ -1,5 +1,8 @@
 # Project UML
 
+### GameState System
+![gamestatesystem](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jskelly2021/Journey/main/UML/gamestatesystem.iuml)
+
 ### Scene System
 ![sceneloader](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jskelly2021/Journey/main/UML/scenesystem.iuml)
 

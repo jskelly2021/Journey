@@ -1,0 +1,32 @@
+@startuml gamestatesystem
+
+class GameStateManager {
+    {static} +Instance
+    --
+    -pauseGame()
+    -resumeGame()
+    -quitGame()
+}
+
+class GameStateEvents {
+    ..Events..
+    {static} +OnPauseGame
+    {static} +OnResumeGame
+    --Invokers--
+    {static} +PauseGame()
+    {static} +ResumeGame()
+}
+
+class GameStateController {
+    +resumeGame()
+    +pauseGame()
+    +quitGame()
+}
+
+entity GameObject
+
+GameStateManager    "1..1"   .left.   "1..1"   GameStateEvents   : "Listens >"
+GameStateController "0..*"   .up.     "1.1"    GameStateEvents   : "Invokes >"
+GameStateController "0..*"   .right   "0..*"   GameObject        : "Has <"
+
+@enduml

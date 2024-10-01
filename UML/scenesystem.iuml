@@ -8,26 +8,25 @@ class SceneLoader {
     -setSceneActive()
 }
 
+class SceneEvents {
+    ..Events..
+    {static} +OnLoadScene
+    {static} +OnUnloadScene
+    {static} +OnSetSceneActive
+    --Invokers--
+    {static} +loadScene()
+    {static} +unloadScene()
+    {static} +setSceneActive()
+}
+
 class SceneController {
     +loadScene()
     +unloadScene()
     +setSceneActive()
 }
-
-class AudioEventManager {
-    ..Events..
-    {static} +LoadScene
-    {static} +UnloadScene
-    {static} +SetSceneActive
-    --Invokers--
-    +loadScene()
-    +unloadScene()
-    +setSceneActive()
-}
-
 entity GameObject
 
-SceneLoader       "1..1 "   .right.    "1..1"     AudioEventManager   : " Listens >"
-SceneController   "0..*"    .up.       "1..1"     AudioEventManager   : " Invokes >"
-SceneController   "0..*"    -left-     "0..*"     GameObject          : " Has <"
+SceneLoader       "1..1 "  .right.    "1..1"     SceneEvents   : " Listens >"
+SceneController   "0..*"   .up.       "1..1"     SceneEvents   : " Invokes >"
+SceneController   "0..*"   -left-     "0..*"     GameObject    : " Has <"
 @enduml
