@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UIController : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuCanvas;
 

@@ -132,29 +132,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 69143780}
-  - component: {fileID: 69143779}
+  - component: {fileID: 69143783}
   - component: {fileID: 69143781}
   - component: {fileID: 69143782}
   m_Layer: 0
-  m_Name: UIController
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &69143779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69143778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bfe5c534c844fe42bb4ed5c466cefa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuCanvas: {fileID: 1903147322}
 --- !u!4 &69143780
 Transform:
   m_ObjectHideFlags: 0
@@ -194,6 +181,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83ba5bf6d2961d4eb4762ceb9161e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &69143783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69143778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6369922a643ccfa408ff8ed018f07545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuCanvas: {fileID: 1903147322}
 --- !u!1 &311782988 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2417125846524152221, guid: 35b529fdaed38f14cbc3b9d0bb5b353e, type: 3}
@@ -3082,7 +3082,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2003250339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b316f69d6b38fcd4fb728fbb6a725512, type: 3}
+  m_Script: {fileID: 11500000, guid: d9d4d644021b70e4e8c2a39c484dd005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 909c42bd503019244a7ec99978fd8a11, type: 3}
