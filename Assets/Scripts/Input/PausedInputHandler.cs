@@ -17,4 +17,12 @@ public class PausedInputHandler : InputHandler, PlayerInputAction.IPausedActions
 
         GameStateEvents.SetGameState(GameStates.Play);
     }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        UIEvents.enableCanvas(UICanvases.StoreMenu, true);
+    }
 }

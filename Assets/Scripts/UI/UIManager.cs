@@ -3,9 +3,11 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject mainMenuCanvas;
-    [SerializeField] private GameObject pauseMenuCanvas;
+    [SerializeField] private GameObject startMenuCanvas;
     [SerializeField] private GameObject optionsMenuCanvas;
-    [SerializeField] private GameObject storeCanvas;
+    [SerializeField] private GameObject pauseMenuCanvas;
+    [SerializeField] private GameObject storeMenuCanvas;
+    [SerializeField] private GameObject hudCanvas;
 
     private void OnEnable()
     {
@@ -26,18 +28,22 @@ public class UIManager : MonoBehaviour
 
     private void enableCanvas(UICanvases canvas, bool setActive) => GetCanvas(canvas).SetActive(setActive);
     
-    public GameObject GetCanvas(UICanvases canvas)
+    private GameObject GetCanvas(UICanvases canvas)
     {
         switch (canvas)
         {
             case UICanvases.MainMenu:
                 return mainMenuCanvas;
-            case UICanvases.PauseMenu:
-                return pauseMenuCanvas;
+            case UICanvases.StartMenu:
+                return startMenuCanvas;
             case UICanvases.OptionsMenu:
                 return optionsMenuCanvas;
+            case UICanvases.PauseMenu:
+                return pauseMenuCanvas;
             case UICanvases.StoreMenu:
-                return storeCanvas;
+                return storeMenuCanvas;
+            case UICanvases.HUD:
+                return hudCanvas;
             default:
                 return null;
         }

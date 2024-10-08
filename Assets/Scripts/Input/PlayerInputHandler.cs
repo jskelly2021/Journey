@@ -17,4 +17,12 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
         playerInput.Paused.Enable();
         playerInput.Player.Disable();
     }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase != InputActionPhase.Performed)
+            return;
+
+        UIEvents.enableCanvas(UICanvases.HUD, true);
+    }
 }
