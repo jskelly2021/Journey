@@ -14,7 +14,7 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
 
         GameStateEvents.SetGameState(GameStates.Pause);
 
-        playerInput.Paused.Enable();
+        playerInput.PauseMenu.Enable();
         playerInput.Player.Disable();
     }
 
@@ -23,6 +23,6 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        UIEvents.enableCanvas(UICanvases.HUD, true);
+        StoreEvents.OpenStore();
     }
 }

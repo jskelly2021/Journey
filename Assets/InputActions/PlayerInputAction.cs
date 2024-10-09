@@ -599,7 +599,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Paused"",
+            ""name"": ""PauseMenu"",
             ""id"": ""2b737bb4-5f9c-45a7-a808-4c4f132f999c"",
             ""actions"": [
                 {
@@ -632,6 +632,34 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""StoreMenu"",
+            ""id"": ""8a2636b3-f9e5-4142-a0a4-1aebf26f9386"",
+            ""actions"": [
+                {
+                    ""name"": ""ExitMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""689ef196-cfc0-48b4-badd-43658f8dcf41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""55b368a5-2fa7-41dc-a60b-12915f06a400"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ExitMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -717,9 +745,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        // Paused
-        m_Paused = asset.FindActionMap("Paused", throwIfNotFound: true);
-        m_Paused_Resume = m_Paused.FindAction("Resume", throwIfNotFound: true);
+        // PauseMenu
+        m_PauseMenu = asset.FindActionMap("PauseMenu", throwIfNotFound: true);
+        m_PauseMenu_Resume = m_PauseMenu.FindAction("Resume", throwIfNotFound: true);
+        // StoreMenu
+        m_StoreMenu = asset.FindActionMap("StoreMenu", throwIfNotFound: true);
+        m_StoreMenu_ExitMenu = m_StoreMenu.FindAction("ExitMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -950,51 +981,97 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     }
     public UIActions @UI => new UIActions(this);
 
-    // Paused
-    private readonly InputActionMap m_Paused;
-    private List<IPausedActions> m_PausedActionsCallbackInterfaces = new List<IPausedActions>();
-    private readonly InputAction m_Paused_Resume;
-    public struct PausedActions
+    // PauseMenu
+    private readonly InputActionMap m_PauseMenu;
+    private List<IPauseMenuActions> m_PauseMenuActionsCallbackInterfaces = new List<IPauseMenuActions>();
+    private readonly InputAction m_PauseMenu_Resume;
+    public struct PauseMenuActions
     {
         private @PlayerInputAction m_Wrapper;
-        public PausedActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Resume => m_Wrapper.m_Paused_Resume;
-        public InputActionMap Get() { return m_Wrapper.m_Paused; }
+        public PauseMenuActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Resume => m_Wrapper.m_PauseMenu_Resume;
+        public InputActionMap Get() { return m_Wrapper.m_PauseMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PausedActions set) { return set.Get(); }
-        public void AddCallbacks(IPausedActions instance)
+        public static implicit operator InputActionMap(PauseMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IPauseMenuActions instance)
         {
-            if (instance == null || m_Wrapper.m_PausedActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PausedActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Add(instance);
             @Resume.started += instance.OnResume;
             @Resume.performed += instance.OnResume;
             @Resume.canceled += instance.OnResume;
         }
 
-        private void UnregisterCallbacks(IPausedActions instance)
+        private void UnregisterCallbacks(IPauseMenuActions instance)
         {
             @Resume.started -= instance.OnResume;
             @Resume.performed -= instance.OnResume;
             @Resume.canceled -= instance.OnResume;
         }
 
-        public void RemoveCallbacks(IPausedActions instance)
+        public void RemoveCallbacks(IPauseMenuActions instance)
         {
-            if (m_Wrapper.m_PausedActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPausedActions instance)
+        public void SetCallbacks(IPauseMenuActions instance)
         {
-            foreach (var item in m_Wrapper.m_PausedActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PauseMenuActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PausedActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PauseMenuActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PausedActions @Paused => new PausedActions(this);
+    public PauseMenuActions @PauseMenu => new PauseMenuActions(this);
+
+    // StoreMenu
+    private readonly InputActionMap m_StoreMenu;
+    private List<IStoreMenuActions> m_StoreMenuActionsCallbackInterfaces = new List<IStoreMenuActions>();
+    private readonly InputAction m_StoreMenu_ExitMenu;
+    public struct StoreMenuActions
+    {
+        private @PlayerInputAction m_Wrapper;
+        public StoreMenuActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ExitMenu => m_Wrapper.m_StoreMenu_ExitMenu;
+        public InputActionMap Get() { return m_Wrapper.m_StoreMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(StoreMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IStoreMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_StoreMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_StoreMenuActionsCallbackInterfaces.Add(instance);
+            @ExitMenu.started += instance.OnExitMenu;
+            @ExitMenu.performed += instance.OnExitMenu;
+            @ExitMenu.canceled += instance.OnExitMenu;
+        }
+
+        private void UnregisterCallbacks(IStoreMenuActions instance)
+        {
+            @ExitMenu.started -= instance.OnExitMenu;
+            @ExitMenu.performed -= instance.OnExitMenu;
+            @ExitMenu.canceled -= instance.OnExitMenu;
+        }
+
+        public void RemoveCallbacks(IStoreMenuActions instance)
+        {
+            if (m_Wrapper.m_StoreMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IStoreMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_StoreMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_StoreMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public StoreMenuActions @StoreMenu => new StoreMenuActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1058,8 +1135,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
     }
-    public interface IPausedActions
+    public interface IPauseMenuActions
     {
         void OnResume(InputAction.CallbackContext context);
+    }
+    public interface IStoreMenuActions
+    {
+        void OnExitMenu(InputAction.CallbackContext context);
     }
 }

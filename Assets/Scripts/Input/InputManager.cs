@@ -6,7 +6,8 @@ public class InputManager : MonoBehaviour
     private PlayerInputAction playerInput;
     
     private InputHandler playerInputHandler;
-    private InputHandler pausedInputHandler;
+    private InputHandler pauseMenuInputHandler;
+    private InputHandler storeMenuInputHandler;
 
     public static InputManager Instance { get { return instance; } }
     public PlayerInputAction PlayerInput { get { return playerInput; } }
@@ -21,13 +22,15 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInputAction();
 
         playerInputHandler = new PlayerInputHandler(playerInput);
-        pausedInputHandler = new PausedInputHandler(playerInput);
+        pauseMenuInputHandler = new PauseMenuInputHandler(playerInput);
+        storeMenuInputHandler = new StoreMenuInputHandler(playerInput);
     }
 
     private void Start()
     {
         disableActionMap("Player");
-        disableActionMap("Paused");
+        disableActionMap("PauseMenu");
+        disableActionMap("StoreMenu");
     }
 
     private void OnEnable()

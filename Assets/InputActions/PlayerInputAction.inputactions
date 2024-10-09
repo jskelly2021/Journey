@@ -577,7 +577,7 @@
             ]
         },
         {
-            "name": "Paused",
+            "name": "PauseMenu",
             "id": "2b737bb4-5f9c-45a7-a808-4c4f132f999c",
             "actions": [
                 {
@@ -610,6 +610,34 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "StoreMenu",
+            "id": "8a2636b3-f9e5-4142-a0a4-1aebf26f9386",
+            "actions": [
+                {
+                    "name": "ExitMenu",
+                    "type": "Button",
+                    "id": "689ef196-cfc0-48b4-badd-43658f8dcf41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "55b368a5-2fa7-41dc-a60b-12915f06a400",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ExitMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

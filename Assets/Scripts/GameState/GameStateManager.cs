@@ -32,11 +32,13 @@ public sealed class GameStateManager : MonoBehaviour
     private void resumeGame()
     {
         Time.timeScale = 1.0f;
+        UIEvents.EnableCanvas(UICanvases.PauseMenu, false);
     }
 
     private void pauseGame()
     {
         Time.timeScale = 0.0f;
+        UIEvents.EnableCanvas(UICanvases.PauseMenu, true);
     }
 
     private void quitGame()
