@@ -6,5 +6,6 @@ public class GameManager : MonoBehaviour
     {
         StoreController.Init();
         PauseController.Init();
+        TransitionController.Init();
     }
 }
