@@ -1,13 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Eflatun.SceneReference;
 
 public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader instance = null;
 
-    [SerializeField] private SceneReference bootScene;
+    [SerializeField] private Scenes bootScene;
 
     public static SceneLoader Instance { get { return instance; } }
 
@@ -34,48 +33,49 @@ public class SceneLoader : MonoBehaviour
         SceneEvents.OnSetSceneActive -= setSceneActive;
     }
 
-    private void loadScene(SceneReference sceneToLoad)
+    private void loadScene(Scenes sceneToLoad)
     {
-        if (!SceneManager.GetSceneByPath(sceneToLoad.Path).IsValid())
+        
+        if (!SceneManager.GetSceneByName(sceneToLoad.GetSceneName()).IsValid())
             StartCoroutine(loadSceneAsync(sceneToLoad));
     }
 
-    private void setSceneActive(SceneReference sceneToSetActive)
+    private void setSceneActive(Scenes sceneToSetActive)
     {
-        if (!SceneManager.GetSceneByPath(sceneToSetActive.Path).IsValid())
+        if (!SceneManager.GetSceneByName(sceneToSetActive.GetSceneName()).IsValid())
             StartCoroutine(setSceneActiveAsync(sceneToSetActive));
         else
-            SceneManager.SetActiveScene(SceneManager.GetSceneByPath(sceneToSetActive.Path));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToSetActive.GetSceneName()));
     }
 
-    private void unloadScene(SceneReference sceneToUnload)
+    private void unloadScene(Scenes sceneToUnload)
     {
         StartCoroutine(unloadSceneAsync(sceneToUnload));
     }
 
-    private IEnumerator loadSceneAsync(SceneReference sceneToLoad)
+    private IEnumerator loadSceneAsync(Scenes sceneToLoad)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad.Path, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad.GetSceneName(), LoadSceneMode.Additive);
          
         while (!asyncLoad.isDone)
             yield return null;
     }
 
-    private IEnumerator unloadSceneAsync(SceneReference sceneToUnload)
+    private IEnumerator unloadSceneAsync(Scenes sceneToUnload)
     {
-        while (SceneManager.GetActiveScene().path == sceneToUnload.Path)
+        while (SceneManager.GetActiveScene().name == sceneToUnload.GetSceneName())
             yield return null;
 
-        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(sceneToUnload.Path, UnloadSceneOptions.None);
+        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(sceneToUnload.GetSceneName(), UnloadSceneOptions.None);
     }
 
-    private IEnumerator setSceneActiveAsync(SceneReference sceneToSetActive)
+    private IEnumerator setSceneActiveAsync(Scenes sceneToSetActive)
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToSetActive.Path, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToSetActive.GetSceneName(), LoadSceneMode.Additive);
 
         while (!asyncLoad.isDone)
             yield return null;
 
-        SceneManager.SetActiveScene(SceneManager.GetSceneByPath(sceneToSetActive.Path));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneToSetActive.GetSceneName()));
     }
 }
