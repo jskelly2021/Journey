@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameStateController : MonoBehaviour
+public class GameStateButtonController : MonoBehaviour
 {
     public void resumeGame() => GameStateEvents.ChangeGameState(GameStates.Play);
     public void pauseGame() => GameStateEvents.ChangeGameState(GameStates.Pause);

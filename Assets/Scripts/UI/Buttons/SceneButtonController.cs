@@ -1,7 +1,7 @@
 using UnityEngine;
 using Eflatun.SceneReference;
 
-public class SceneController : MonoBehaviour
+public class SceneButtonController : MonoBehaviour
 {
     [SerializeField] private SceneReference sceneToLoad;
     [SerializeField] private SceneReference sceneToUnload;
