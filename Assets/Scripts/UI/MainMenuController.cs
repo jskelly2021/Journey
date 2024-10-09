@@ -2,36 +2,25 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private AudioClip audioClip;
+    [SerializeField] private AudioClip menuMusic;
 
-    public void GoToMainMenu()
+    private void OnEnable()
     {
-        AudioEvents.PlayAudio(AudioGroup.Music, audioClip, null);
-        InputEvents.EnableActionMap("UI");
-        UIEvents.EnableCanvas(UICanvases.MainMenu, true);
+        AudioEvents.PlayAudio(AudioGroup.Music, menuMusic, null);
     }
-    public void LeaveMainMenu()
+
+    private void OnDisable()
     {
         AudioEvents.StopAllAudioInGroup(AudioGroup.Music);
-        InputEvents.DisableActionMap("UI");
-        UIEvents.EnableCanvas(UICanvases.MainMenu, false);
     }
 
     public void GoToStartMenu()
-    {
-        UIEvents.EnableCanvas(UICanvases.StartMenu, true);
-    }
+        => UIEvents.EnableCanvas(UICanvases.StartMenu, true);
     public void LeaveStartMenu()
-    {
-        UIEvents.EnableCanvas(UICanvases.StartMenu, false);
-    }
+        => UIEvents.EnableCanvas(UICanvases.StartMenu, false);
 
     public void GoToOptionsMenu()
-    {
-        UIEvents.EnableCanvas(UICanvases.OptionsMenu, true);
-    }
+        => UIEvents.EnableCanvas(UICanvases.OptionsMenu, true);
     public void LeaveOptionsMenu()
-    {
-        UIEvents.EnableCanvas(UICanvases.OptionsMenu, false);
-    }
+        =>  UIEvents.EnableCanvas(UICanvases.OptionsMenu, false);
 }
