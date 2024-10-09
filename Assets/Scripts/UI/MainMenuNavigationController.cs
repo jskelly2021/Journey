@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainMenuController : MonoBehaviour
+public class MainMenuNavigationController : MonoBehaviour
 {
     [SerializeField] private AudioClip menuMusic;
 
