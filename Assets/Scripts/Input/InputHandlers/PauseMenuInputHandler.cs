@@ -12,9 +12,6 @@ public class PauseMenuInputHandler : InputHandler, PlayerInputAction.IPauseMenuA
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        playerInput.PauseMenu.Disable();
-        playerInput.Player.Enable();
-
-        GameStateEvents.SetGameState(GameStates.Play);
+        PauseController.ResumeGame();
     }
 }

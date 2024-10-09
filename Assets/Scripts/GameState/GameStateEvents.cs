@@ -2,25 +2,7 @@ using System;
 
 public class GameStateEvents
 {
-    public static event Action OnResumeGame;
-    public static event Action OnPauseGame;
-    public static event Action OnQuitGame;
-
-    public static void SetGameState(GameStates gameState)
-    {
-        switch (gameState)
-        {
-            case GameStates.Play:
-                OnResumeGame?.Invoke();
-                break;
-            case GameStates.Pause:
-                OnPauseGame?.Invoke();
-                break;
-            case GameStates.Quit:
-                OnQuitGame?.Invoke();
-                break;
-            default:
-                break;
-        }
-    }
+    public static event Action<GameStates> OnChangeGameState;
+    
+    public static void ChangeGameState(GameStates gameState) => OnChangeGameState?.Invoke(gameState);
 }

@@ -12,6 +12,6 @@ public class StoreMenuInputHandler : InputHandler, PlayerInputAction.IStoreMenuA
         if (context.phase != InputActionPhase.Performed)
             return;
         
-        StoreEvents.CloseStore();
+        StoreController.CloseStore();
     }
 }

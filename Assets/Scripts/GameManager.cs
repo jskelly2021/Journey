@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     private void Awake()
     {
-        StoreManager.Init();
+        StoreController.Init();
+        PauseController.Init();
     }
 }

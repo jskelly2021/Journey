@@ -12,10 +12,7 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        GameStateEvents.SetGameState(GameStates.Pause);
-
-        playerInput.PauseMenu.Enable();
-        playerInput.Player.Disable();
+        PauseController.PauseGame();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
@@ -23,6 +20,6 @@ public class PlayerInputHandler : InputHandler, PlayerInputAction.IPlayerActions
         if (context.phase != InputActionPhase.Performed)
             return;
 
-        StoreEvents.OpenStore();
+        StoreController.OpenStore();
     }
 }

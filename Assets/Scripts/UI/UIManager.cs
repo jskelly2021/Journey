@@ -11,20 +11,12 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameStateEvents.OnPauseGame += enablePauseMenu;
-        GameStateEvents.OnResumeGame += disablePauseMenu;
-
         UIEvents.OnEnableCanvas += enableCanvas;
     }
     private void OnDisable()
     {
-        GameStateEvents.OnPauseGame -= enablePauseMenu;
-        GameStateEvents.OnResumeGame -= disablePauseMenu;
         UIEvents.OnEnableCanvas -= enableCanvas;
     }
-
-    private void enablePauseMenu() => pauseMenuCanvas.SetActive(true);
-    private void disablePauseMenu() => pauseMenuCanvas.SetActive(false);
 
     private void enableCanvas(UICanvases canvas, bool setActive) => GetCanvas(canvas).SetActive(setActive);
     

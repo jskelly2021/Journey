@@ -1,33 +1,27 @@
-﻿public static class StoreManager
+﻿public static class StoreController
 {
-    static StoreManager()
-    {
-        StoreEvents.OnOpenStore += OpenStore;
-        StoreEvents.OnCloseStore += CloseStore;
-    }
-
     public static void Init() {}
 
-    private static void OpenStore()
+    public static void OpenStore()
     {
         UIEvents.EnableCanvas(UICanvases.StoreMenu, true);
         InputEvents.EnableActionMap("StoreMenu");
         InputEvents.DisableActionMap("Player");
     }
 
-    private static void CloseStore()
+    public static void CloseStore()
     {
         UIEvents.EnableCanvas(UICanvases.StoreMenu, false);
         InputEvents.EnableActionMap("Player");
         InputEvents.DisableActionMap("StoreMenu");
     }
 
-    private static void BuyItem()
+    public static void BuyItem()
     {
 
     }
 
-    private static void SellItem()
+    public static void SellItem()
     {
 
     }

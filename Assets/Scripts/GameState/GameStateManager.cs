@@ -17,33 +17,44 @@ public sealed class GameStateManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameStateEvents.OnResumeGame += resumeGame;
-        GameStateEvents.OnPauseGame += pauseGame;
-        GameStateEvents.OnQuitGame += quitGame;
-
+        GameStateEvents.OnChangeGameState += changeGameState;
     }
     private void OnDisable()
     {
-        GameStateEvents.OnResumeGame -= resumeGame;
-        GameStateEvents.OnPauseGame -= pauseGame;
-        GameStateEvents.OnQuitGame -= quitGame;
+        GameStateEvents.OnChangeGameState -= changeGameState;
     }
 
     private void resumeGame()
     {
         Time.timeScale = 1.0f;
-        UIEvents.EnableCanvas(UICanvases.PauseMenu, false);
     }
 
     private void pauseGame()
     {
         Time.timeScale = 0.0f;
-        UIEvents.EnableCanvas(UICanvases.PauseMenu, true);
     }
 
     private void quitGame()
     {
         Debug.Log("Quitting Game");
         Application.Quit();
+    }
+
+    private void changeGameState(GameStates gameState)
+    {
+        switch (gameState)
+        {
+            case GameStates.Play:
+                resumeGame();
+                break;
+            case GameStates.Pause:
+                pauseGame();
+                break;
+            case GameStates.Quit:
+                quitGame();
+                break;
+            default:
+                break;
+        }
     }
 }
