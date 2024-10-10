@@ -17,16 +17,6 @@ class GameStateEvents {
     {static} +ResumeGame()
 }
 
-class GameStateController {
-    +resumeGame()
-    +pauseGame()
-    +quitGame()
-}
-
-entity GameObject
-
-GameStateManager    "1..1"   .left.   "1..1"   GameStateEvents   : "Listens >"
-GameStateController "0..*"   .up.     "1.1"    GameStateEvents   : "Invokes >"
-GameStateController "0..*"   .right   "0..*"   GameObject        : "Has <"
+GameStateManager    "1..1"   .up.     "1..1"   GameStateEvents   : "Listens >"
 
 @enduml

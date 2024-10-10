@@ -19,14 +19,6 @@ class SceneEvents {
     {static} +setSceneActive()
 }
 
-class SceneController {
-    +loadScene()
-    +unloadScene()
-    +setSceneActive()
-}
-entity GameObject
+SceneLoader    "1..1"   .up.    "1..1"    SceneEvents   : " Listens >"
 
-SceneLoader       "1..1 "  .right.    "1..1"     SceneEvents   : " Listens >"
-SceneController   "0..*"   .up.       "1..1"     SceneEvents   : " Invokes >"
-SceneController   "0..*"   -left-     "0..*"     GameObject    : " Has <"
 @enduml

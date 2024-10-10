@@ -51,22 +51,7 @@ class AudioPool {
     +returnAudioSourceWhenFinished()
 }
 
-class AudioController {
-    -audioClip
-    +playMenuAudioClip()
-    +playGameAudioClip()
-    +playMusicAudioClip()
-    +setMasterVolume()
-    +setMusicVolume()
-    +setGameFXVolume()
-    +setMenuFXVolume()
-}
-
-entity GameObject
-
-AudioManager       "1..1"    .right.    "1..1"    AudioEvents    : "Listens >"
-AudioManager       "1..1"    .down.     "0..*"    AudioPool      : "Has >"
-AudioController    "0..*"    .up.       "1..1"    AudioEvents    : "Invokes >"
-AudioController    "0..1"    -right-    "0..*"    GameObject     : "Has <"
+AudioManager       "1..1"    .up.     "1..1"    AudioEvents    : "Listens >"
+AudioManager       "1..1"    .right.  "0..*"    AudioPool      : "Has >"
 
 @enduml
