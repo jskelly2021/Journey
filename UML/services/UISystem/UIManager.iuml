@@ -1,5 +1,6 @@
 @startuml UIManager
 class UIManager {
+    {static} -instance
     -canvases
     ---
     -enableCanvases()

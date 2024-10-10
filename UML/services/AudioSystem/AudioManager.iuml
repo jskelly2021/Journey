@@ -1,6 +1,6 @@
 @startuml AudioManager
 class AudioManager {
-    {static} +Instance
+    {static} -instance
     -audioMixer
     ---
     -playAudio()

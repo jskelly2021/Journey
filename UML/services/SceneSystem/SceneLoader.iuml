@@ -1,6 +1,6 @@
 @startuml SceneLoader
 class SceneLoader {
-    {static} +Instance
+    {static} -instance
     -bootScene
     --
     -loadScene()

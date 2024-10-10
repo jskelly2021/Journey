@@ -1,11 +1,11 @@
 @startuml transition
 !theme reddress-darkblue
 
-!include services/audiosystem.iuml
-!include services/scenesystem.iuml
-!include services/gamestatesystem.iuml
-!include services/uisystem.iuml
-!include services/inputsystem.iuml
+!include services/AudioSystem/AudioSystem.iuml
+!include services/SceneSystem/SceneSystem.iuml
+!include services/GameStateSystem/GameStateSystem.iuml
+!include services/UISystem/UISystem.iuml
+!include services/InputSystem/InputSystem.iuml
 
 class TransitionController {
     {static} +StartGame()
@@ -18,13 +18,13 @@ class TransitionButtonController {
 
 class GameObject
 
-TransitionController       "1..1"   .down.    "1..1"   InputEvents           : "Invokes >"
-TransitionController       "1..1"   .down.    "1..1"   UIEvents              : "Invokes >"
-TransitionController       "1..1"   .down.    "1..1"   GameStateEvents       : "Invokes >"
-TransitionController       "1..1"   .down.    "1..1"   SceneEvents           : "Invokes >"
-TransitionController       "1..1"   .down.    "1..1"   AudioEvents           : "Invokes >"
+TransitionController "1..1" .down. "1..1" IInputService     : "Implements >"
+TransitionController "1..1" .down. "1..1" IUIService        : "Implements >"
+TransitionController "1..1" .down. "1..1" IGameStateService : "Implements >"
+TransitionController "1..1" .down. "1..1" ISceneService     : "Implements >"
+TransitionController "1..1" .down. "1..1" IAudioService     : "Implements >"
 
-TransitionButtonController "0..*"   -down-   "0..1"   TransitionController       : "Calls >"
-GameObject            "0..*"   -down-   "0..1"   TransitionButtonController : "Has >"
+TransitionButtonController "0..*" -down- "0..1" TransitionController       : "Calls >"
+GameObject                 "0..*" -down- "0..1" TransitionButtonController : "Has >"
 
 @enduml

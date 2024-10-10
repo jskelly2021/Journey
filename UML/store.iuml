@@ -1,11 +1,11 @@
 @startuml store
 !theme reddress-darkblue
 
-!include services/audiosystem.iuml
-!include services/scenesystem.iuml
-!include services/gamestatesystem.iuml
-!include services/uisystem.iuml
-!include services/inputsystem.iuml
+!include services/AudioSystem/AudioSystem.iuml
+!include services/SceneSystem/SceneSystem.iuml
+!include services/GameStateSystem/GameStateSystem.iuml
+!include services/UISystem/UISystem.iuml
+!include services/InputSystem/InputSystem.iuml
 
 class StoreController {
     {static} +OpenStore()
@@ -19,13 +19,12 @@ class StoreButtonController {
 
 class GameObject
 
-StoreController       "1..1"   .down.    "1..1"   InputEvents           : "Invokes >"
-StoreController       "1..1"   .down.    "1..1"   UIEvents              : "Invokes >"
-StoreController       "1..1"   .down.    "1..1"   GameStateEvents       : "Invokes >"
-StoreController       "1..1"   .down.    "1..1"   SceneEvents           : "Invokes >"
-StoreController       "1..1"   .down.    "1..1"   AudioEvents           : "Invokes >"
+StoreController "1..1" .down. "1..1" IInputService     : "Implements >"
+StoreController "1..1" .down. "1..1" IUIService        : "Implements >"
+StoreController "1..1" .down. "1..1" IGameStateService : "Implements >"
+StoreController "1..1" .down. "1..1" ISceneService     : "Implements >"
+StoreController "1..1" .down. "1..1" IAudioService     : "Implements >"
 
 StoreButtonController "0..*"   -down-   "0..1"   StoreController       : "Calls >"
 GameObject            "0..*"   -down-   "0..1"   StoreButtonController : "Has >"
-
 @enduml

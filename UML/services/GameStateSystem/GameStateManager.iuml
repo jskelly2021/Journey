@@ -1,6 +1,6 @@
 @startuml GameStateManager
 class GameStateManager {
-    {static} +Instance
+    {static} -instance
     --
     -pauseGame()
     -resumeGame()

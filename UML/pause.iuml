@@ -1,11 +1,11 @@
 @startuml pause
 !theme reddress-darkblue
 
-!include services/audiosystem.iuml
-!include services/scenesystem.iuml
-!include services/gamestatesystem.iuml
-!include services/uisystem.iuml
-!include services/inputsystem.iuml
+!include services/AudioSystem/AudioSystem.iuml
+!include services/SceneSystem/SceneSystem.iuml
+!include services/GameStateSystem/GameStateSystem.iuml
+!include services/UISystem/UISystem.iuml
+!include services/InputSystem/InputSystem.iuml
 
 class PauseController {
     {static} +PauseGame()
@@ -18,11 +18,11 @@ class PauseButtonController {
 
 class GameObject
 
-PauseController       "1..1"   .down.    "1..1"   InputEvents           : "Invokes >"
-PauseController       "1..1"   .down.    "1..1"   UIEvents              : "Invokes >"
-PauseController       "1..1"   .down.    "1..1"   GameStateEvents       : "Invokes >"
-PauseController       "1..1"   .down.    "1..1"   SceneEvents           : "Invokes >"
-PauseController       "1..1"   .down.    "1..1"   AudioEvents           : "Invokes >"
+PauseController "1..1" .down. "1..1" IInputService     : "Implements >"
+PauseController "1..1" .down. "1..1" IUIService        : "Implements >"
+PauseController "1..1" .down. "1..1" IGameStateService : "Implements >"
+PauseController "1..1" .down. "1..1" ISceneService     : "Implements >"
+PauseController "1..1" .down. "1..1" IAudioService     : "Implements >"
 
 PauseButtonController "0..*"   -down-   "0..1"   PauseController       : "Calls >"
 GameObject            "0..*"   -down-   "0..1"   PauseButtonController : "Has >"

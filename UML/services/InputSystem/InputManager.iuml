@@ -1,6 +1,6 @@
 @startuml InputManager
 class InputManager {
-    {static} +Instance
+    {static} -instance
     -PlayerInput
     -playerInputHandler
     -pausedInputHandler
