@@ -1,4 +1,6 @@
 @startuml uisystem
+!theme reddress-darkblue
+
 class UIEvents {
     ..Events..
     {static} +OnEnableCanvas

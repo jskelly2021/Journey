@@ -1,4 +1,6 @@
 @startuml inputsystem
+!theme reddress-darkblue
+
 class AudioManager {
     {static} +Instance
     -audioMixer
@@ -52,6 +54,6 @@ class AudioPool {
 }
 
 AudioManager       "1..1"    .up.     "1..1"    AudioEvents    : "Listens >"
-AudioManager       "1..1"    .right.  "0..*"    AudioPool      : "Has >"
+AudioManager       "1..1"    .down.  "0..*"    AudioPool      : "Has >"
 
 @enduml

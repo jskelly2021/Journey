@@ -19,3 +19,6 @@ Denoted as controllers, higher level concepts, such as a store, are created from
 
 ### UI System
 ![uisysten](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jskelly2021/Journey/main/UML/uisystem.iuml)
+
+### Example of System Implementation
+![store](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jskelly2021/Journey/main/UML/store.iuml)

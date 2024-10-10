@@ -1,4 +1,5 @@
 @startuml gamestatesystem
+!theme reddress-darkblue
 
 class GameStateManager {
     {static} +Instance
