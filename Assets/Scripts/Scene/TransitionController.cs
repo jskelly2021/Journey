@@ -4,7 +4,7 @@
 
     public static void StartGame()
     {
-        UIEvents.EnableCanvas(UICanvases.MainMenu, false);
+        UIEvents.DisableAllCanvases();
         UIEvents.EnableCanvas(UICanvases.HUD, true);
         SceneEvents.SetSceneActive(Scenes.Main);
         InputEvents.EnableActionMap("Player");
@@ -13,11 +13,12 @@
 
     public static void GoToMainMenu()
     {
-        UIEvents.EnableCanvas(UICanvases.HUD, false);
+        UIEvents.DisableAllCanvases();
         UIEvents.EnableCanvas(UICanvases.MainMenu, true);
         SceneEvents.SetSceneActive(Scenes.UI);
         SceneEvents.UnloadScene(Scenes.Main);
         InputEvents.EnableActionMap("UI");
+        InputEvents.DisableActionMap("PauseMenu");
         InputEvents.DisableActionMap("Player");
     }
 }

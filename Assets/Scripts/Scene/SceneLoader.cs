@@ -50,7 +50,8 @@ public class SceneLoader : MonoBehaviour
 
     private void unloadScene(Scenes sceneToUnload)
     {
-        StartCoroutine(unloadSceneAsync(sceneToUnload));
+        if (SceneManager.GetSceneByName(sceneToUnload.GetSceneName()).isLoaded)
+            StartCoroutine(unloadSceneAsync(sceneToUnload));
     }
 
     private IEnumerator loadSceneAsync(Scenes sceneToLoad)

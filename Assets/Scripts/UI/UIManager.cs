@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     private void OnEnable()
     {
         UIEvents.OnEnableCanvas += enableCanvas;
+        UIEvents.OnDisableAllCanvases += disableAllCanvases;
     }
     private void OnDisable()
     {
@@ -20,6 +21,14 @@ public class UIManager : MonoBehaviour
 
     private void enableCanvas(UICanvases canvas, bool setActive) => GetCanvas(canvas).SetActive(setActive);
     
+    private void disableAllCanvases()
+    {
+        mainMenuCanvas.SetActive(false);
+        pauseMenuCanvas.SetActive(false);
+        storeMenuCanvas.SetActive(false);
+        hudCanvas.SetActive(false);
+    }
+
     private GameObject GetCanvas(UICanvases canvas)
     {
         switch (canvas)
