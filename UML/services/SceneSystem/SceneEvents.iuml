@@ -1,0 +1,12 @@
+@startuml SceneEvents
+class SceneEvents {
+    ..Events..
+    {static} +OnLoadScene
+    {static} +OnUnloadScene
+    {static} +OnSetSceneActive
+    --Invokers--
+    {static} +loadScene()
+    {static} +unloadScene()
+    {static} +setSceneActive()
+}
+@enduml

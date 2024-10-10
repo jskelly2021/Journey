@@ -1,0 +1,10 @@
+@startuml GameStateEvents
+class GameStateEvents {
+    ..Events..
+    {static} +OnPauseGame
+    {static} +OnResumeGame
+    --Invokers--
+    {static} +PauseGame()
+    {static} +ResumeGame()
+}
+@enduml

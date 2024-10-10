@@ -1,0 +1,10 @@
+@startuml UIManager
+class UIManager {
+    -canvases
+    ---
+    -enableCanvases()
+    -disableAllCanvases()
+    ..Helpers..
+    -getCanvas()
+}
+@enduml

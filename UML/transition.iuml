@@ -1,0 +1,30 @@
+@startuml transition
+!theme reddress-darkblue
+
+!include services/audiosystem.iuml
+!include services/scenesystem.iuml
+!include services/gamestatesystem.iuml
+!include services/uisystem.iuml
+!include services/inputsystem.iuml
+
+class TransitionController {
+    {static} +StartGame()
+    {static} +GoToMenu()
+}
+class TransitionButtonController {
+    +startGame()
+    +goToMenu()
+}
+
+class GameObject
+
+TransitionController       "1..1"   .down.    "1..1"   InputEvents           : "Invokes >"
+TransitionController       "1..1"   .down.    "1..1"   UIEvents              : "Invokes >"
+TransitionController       "1..1"   .down.    "1..1"   GameStateEvents       : "Invokes >"
+TransitionController       "1..1"   .down.    "1..1"   SceneEvents           : "Invokes >"
+TransitionController       "1..1"   .down.    "1..1"   AudioEvents           : "Invokes >"
+
+TransitionButtonController "0..*"   -down-   "0..1"   TransitionController       : "Calls >"
+GameObject            "0..*"   -down-   "0..1"   TransitionButtonController : "Has >"
+
+@enduml

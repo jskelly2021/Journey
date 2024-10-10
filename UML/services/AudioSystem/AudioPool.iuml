@@ -1,0 +1,15 @@
+@startuml AudioPool
+class AudioPool {
+    -audioSources
+    -audioPoolSize
+    -audioPrefab
+    -parentTransform
+    -initAudioPool()
+    +getAvailableAudioSource()
+    +getActiveAudioSource()
+    +returnAudioToPool()
+    +returnAudioSource()
+    +returnAllSources()
+    +returnAudioSourceWhenFinished()
+}
+@endluml

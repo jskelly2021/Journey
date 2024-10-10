@@ -1,0 +1,10 @@
+@startuml InputSystem
+!theme reddress-darkblue
+
+!include InputManager.iuml
+!include InputHandlers.iuml
+!include IInputService.iuml
+
+InputManager "1..1" .up.   "1..1" IInputService  : "Implements >"
+InputManager "1..1" -down- "0..*" InputHandler   : "Has >"
+@enduml

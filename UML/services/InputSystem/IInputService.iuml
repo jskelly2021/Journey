@@ -1,0 +1,5 @@
+@startuml IInputService
+interface IInputService {
+    
+}
+@enduml

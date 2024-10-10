@@ -1,0 +1,8 @@
+@startuml SceneSystem
+!theme reddress-darkblue
+
+!include SceneLoader.iuml
+!include ISceneService.iuml
+
+SceneLoader "1..1" .up. "1..1" ISceneService : "Implements >"
+@enduml

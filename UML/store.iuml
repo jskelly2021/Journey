@@ -1,11 +1,11 @@
 @startuml store
 !theme reddress-darkblue
 
-!include audiosystem.iuml
-!include scenesystem.iuml
-!include gamestatesystem.iuml
-!include uisystem.iuml
-!include inputsystem.iuml
+!include services/audiosystem.iuml
+!include services/scenesystem.iuml
+!include services/gamestatesystem.iuml
+!include services/uisystem.iuml
+!include services/inputsystem.iuml
 
 class StoreController {
     {static} +OpenStore()
@@ -25,7 +25,7 @@ StoreController       "1..1"   .down.    "1..1"   GameStateEvents       : "Invok
 StoreController       "1..1"   .down.    "1..1"   SceneEvents           : "Invokes >"
 StoreController       "1..1"   .down.    "1..1"   AudioEvents           : "Invokes >"
 
-StoreButtonController "0..*"   -right-   "0..1"   StoreController       : "Calls >"
-GameObject            "0..*"   -right-   "0..1"   StoreButtonController : "Has >"
+StoreButtonController "0..*"   -down-   "0..1"   StoreController       : "Calls >"
+GameObject            "0..*"   -down-   "0..1"   StoreButtonController : "Has >"
 
 @enduml

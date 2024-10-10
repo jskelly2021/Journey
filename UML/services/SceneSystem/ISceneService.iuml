@@ -1,0 +1,5 @@
+@startuml ISceneService
+interface ISceneService {
+    
+}
+@enduml

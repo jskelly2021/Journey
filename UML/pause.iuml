@@ -1,0 +1,30 @@
+@startuml pause
+!theme reddress-darkblue
+
+!include services/audiosystem.iuml
+!include services/scenesystem.iuml
+!include services/gamestatesystem.iuml
+!include services/uisystem.iuml
+!include services/inputsystem.iuml
+
+class PauseController {
+    {static} +PauseGame()
+    {static} +ResumeGame()
+}
+class PauseButtonController {
+    +pauseGame()
+    +resumeGame()
+}
+
+class GameObject
+
+PauseController       "1..1"   .down.    "1..1"   InputEvents           : "Invokes >"
+PauseController       "1..1"   .down.    "1..1"   UIEvents              : "Invokes >"
+PauseController       "1..1"   .down.    "1..1"   GameStateEvents       : "Invokes >"
+PauseController       "1..1"   .down.    "1..1"   SceneEvents           : "Invokes >"
+PauseController       "1..1"   .down.    "1..1"   AudioEvents           : "Invokes >"
+
+PauseButtonController "0..*"   -down-   "0..1"   PauseController       : "Calls >"
+GameObject            "0..*"   -down-   "0..1"   PauseButtonController : "Has >"
+
+@enduml

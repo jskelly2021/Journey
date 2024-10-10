@@ -1,0 +1,10 @@
+@startuml SceneLoader
+class SceneLoader {
+    {static} +Instance
+    -bootScene
+    --
+    -loadScene()
+    -unloadScene()
+    -setSceneActive()
+}
+@enduml

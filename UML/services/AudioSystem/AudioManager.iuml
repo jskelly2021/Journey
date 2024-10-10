@@ -1,0 +1,25 @@
+@startuml AudioManager
+class AudioManager {
+    {static} +Instance
+    -audioMixer
+    ---
+    -playAudio()
+    -stopAudioClip()
+    -stopAllAudioInGroup()
+    -setVolume()
+    -getAudioGroupPool()
+    --Object Pooling--
+    ..Pools..
+    -menuAudioPool
+    -gameAudioPool
+    -musicAudioPool
+    ..Pool Sizes..
+    -menuAudioPoolSize
+    -gameAudioPoolSize
+    -musicAudioPoolSize
+    ..Audio Prefabs..
+    -menuAudioPrefab
+    -gameAudioPrefab
+    -musicAudioPrefab
+}
+@enduml

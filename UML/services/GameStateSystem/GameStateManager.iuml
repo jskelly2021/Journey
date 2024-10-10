@@ -1,0 +1,9 @@
+@startuml GameStateManager
+class GameStateManager {
+    {static} +Instance
+    --
+    -pauseGame()
+    -resumeGame()
+    -quitGame()
+}
+@enduml

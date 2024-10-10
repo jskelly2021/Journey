@@ -1,0 +1,10 @@
+@startuml AudioSystem
+!theme reddress-darkblue
+
+!include AudioManager.iuml
+!include IAudioService.iuml
+!include AudioPool.iuml
+
+AudioManager "1..1" .up.   "1..1" IAudioService : "Implements >"
+AudioManager "1..1" .down. "0..*" AudioPool     : "Has >"
+@enduml

@@ -1,0 +1,8 @@
+@startuml currentFull
+!theme reddress-darkblue
+
+!include store.iuml
+!include pause.iuml
+!include transition.iuml
+
+@enduml

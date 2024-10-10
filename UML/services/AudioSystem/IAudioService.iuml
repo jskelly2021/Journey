@@ -1,0 +1,5 @@
+@startuml IAudioService
+interface IAudioService {
+
+}
+@enduml

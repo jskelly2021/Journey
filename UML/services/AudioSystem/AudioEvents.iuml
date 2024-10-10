@@ -1,0 +1,15 @@
+@startuml AudioEvents
+class AudioEvents {
+    ..Events..
+    {static} +OnPlayAudio
+    {static} +OnSetVolume
+    {static} +OnStopAudioClip
+    {static} +OnStopAllAudio
+    ---
+    ..Invokers..
+    {static} +playAudio()
+    {static} +setVolume()
+    {static} +stopAudioClip()
+    {static} +stopAllAudioInGroup()
+}
+@enduml

@@ -1,0 +1,8 @@
+@startuml IGameStateSystem
+!theme reddress-darkblue
+
+!include GameStateManager.iuml
+!include IGameStateService.iuml
+
+GameStateManager "1..1" .up. "1..1" IGameStateService : "Implements >"
+@enduml

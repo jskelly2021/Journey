@@ -1,0 +1,10 @@
+@startuml UIEvents
+class UIEvents {
+    ..Events..
+    {static} +OnEnableCanvas
+    {static} +OnDisableAllCanvases
+    --Invokers--
+    {static} +OnEnableCanvas
+    {static} +OnDisableAllCanvases
+}
+@enduml

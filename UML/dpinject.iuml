@@ -1,0 +1,60 @@
+@startuml dpinject
+!theme reddress-darkblue
+
+!include services/AudioSystem/AudioSystem.iuml
+!include services/GameStateSystem/GameStateSystem.iuml
+!include services/SceneSystem/SceneSystem.iuml
+!include services/InputSystem/InputSystem.iuml
+!include services/UISystem/UISystem.iuml
+
+class StoreController {
+    {static} +OpenStore()
+    {static} +CloseStore()
+}
+
+class StoreButtonController {
+    +openStore()
+    +closeStore()
+}
+
+class PauseController {
+    {static} +PauseGame()
+    {static} +ResumeGame()
+}
+class PauseButtonController {
+    +pauseGame()
+    +resumeGame()
+}
+
+class TransitionController {
+    {static} +StartGame()
+    {static} +GoToMenu()
+}
+class TransitionButtonController {
+    +startGame()
+    +goToMenu()
+}
+
+class Injector {}
+
+class GameObject
+
+Injector -down- IInputService : "Has >"
+Injector -down- IUIService : "Has >"
+Injector -down- ISceneService : "Has >"
+Injector -down- IGameStateService : "Has >"
+Injector -down- IAudioService : "Has >"
+
+Injector -up- StoreController : "Injects >"
+Injector -up- PauseController : "Injects >"
+Injector -up- TransitionController : "Injects >"
+
+StoreButtonController -down- StoreController : "Calls >"
+PauseButtonController -down- PauseController : "Calls >"
+TransitionButtonController -down- TransitionController : "Calls >"
+
+GameObject -down- StoreButtonController : "Has >"
+GameObject -down- PauseButtonController : "Has >"
+GameObject -down- TransitionButtonController : "Has >"
+
+@endluml

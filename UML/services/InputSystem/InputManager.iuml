@@ -1,0 +1,15 @@
+@startuml InputManager
+class InputManager {
+    {static} +Instance
+    -PlayerInput
+    -playerInputHandler
+    -pausedInputHandler
+    --
+    -enableActionMap()
+    -disableActionMap()
+}
+
+class PlayerInputAction
+
+InputManager "1..1" -down- "1..1" PlayerInputAction : "Has >"
+@enduml

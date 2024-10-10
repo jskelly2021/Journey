@@ -1,0 +1,5 @@
+@startuml GameStateService
+interface IGameStateService {
+
+}
+@enduml

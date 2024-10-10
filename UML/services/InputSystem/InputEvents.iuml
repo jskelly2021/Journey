@@ -1,0 +1,10 @@
+@startuml InputSystem
+class InputEvents {
+    ..Events..
+    {static} +OnEnableActionMap
+    {static} +OnDisableActionMap
+    --Invokers--
+    {static} +EnableActionMap()
+    {static} +DisableActionMap()
+}
+@enduml
