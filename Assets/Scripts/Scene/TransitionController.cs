@@ -7,8 +7,8 @@
         UIEvents.DisableAllCanvases();
         UIEvents.EnableCanvas(UICanvases.HUD, true);
         SceneEvents.SetSceneActive(Scenes.Main);
-        InputEvents.EnableActionMap("Player");
-        InputEvents.DisableActionMap("UI");
+        InputEvents.EnableActionMap(ActionMaps.Player);
+        InputEvents.DisableActionMap(ActionMaps.UI);
     }
 
     public static void GoToMainMenu()
@@ -17,8 +17,8 @@
         UIEvents.EnableCanvas(UICanvases.MainMenu, true);
         SceneEvents.SetSceneActive(Scenes.UI);
         SceneEvents.UnloadScene(Scenes.Main);
-        InputEvents.EnableActionMap("UI");
-        InputEvents.DisableActionMap("PauseMenu");
-        InputEvents.DisableActionMap("Player");
+        InputEvents.EnableActionMap(ActionMaps.UI);
+        InputEvents.DisableActionMap(ActionMaps.PauseMenu);
+        InputEvents.DisableActionMap(ActionMaps.Player);
     }
 }

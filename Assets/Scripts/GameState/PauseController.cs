@@ -7,8 +7,9 @@ public static class PauseController
         GameStateEvents.ChangeGameState(GameStates.Pause);
         UIEvents.EnableCanvas(UICanvases.HUD, false);
         UIEvents.EnableCanvas(UICanvases.PauseMenu, true);
-        InputEvents.EnableActionMap("PauseMenu");
-        InputEvents.DisableActionMap("Player");
+        InputEvents.EnableActionMap(ActionMaps.PauseMenu);
+        InputEvents.EnableActionMap(ActionMaps.UI);
+        InputEvents.DisableActionMap(ActionMaps.Player);
     }
 
     public static void ResumeGame()
@@ -16,7 +17,8 @@ public static class PauseController
         GameStateEvents.ChangeGameState(GameStates.Play);
         UIEvents.EnableCanvas(UICanvases.PauseMenu, false);
         UIEvents.EnableCanvas(UICanvases.HUD, true);
-        InputEvents.EnableActionMap("Player");
-        InputEvents.DisableActionMap("PauseMenu");
+        InputEvents.EnableActionMap(ActionMaps.Player);
+        InputEvents.DisableActionMap(ActionMaps.PauseMenu);
+        InputEvents.DisableActionMap(ActionMaps.UI);
     }
 }

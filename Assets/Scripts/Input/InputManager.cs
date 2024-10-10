@@ -28,9 +28,9 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        disableActionMap("Player");
-        disableActionMap("PauseMenu");
-        disableActionMap("StoreMenu");
+        disableActionMap(ActionMaps.Player);
+        disableActionMap(ActionMaps.PauseMenu);
+        disableActionMap(ActionMaps.StoreMenu);
     }
 
     private void OnEnable()
@@ -47,11 +47,15 @@ public class InputManager : MonoBehaviour
         InputEvents.OnDisableActionMap -= disableActionMap;
    }
 
-    private void enableActionMap(string actionMap)
+    private void enableActionMap(ActionMaps actionMap)
     {
         Debug.Log("Enabling" + actionMap);
-        PlayerInput.asset.FindActionMap(actionMap).Enable();
+        PlayerInput.asset.FindActionMap(actionMap.GetMapName()).Enable();
     } 
     
-    private void disableActionMap(string actionMap) => PlayerInput.asset.FindActionMap(actionMap).Disable();
+    private void disableActionMap(ActionMaps actionMap)
+    {
+        Debug.Log("Disabling" + actionMap);
+        PlayerInput.asset.FindActionMap(actionMap.GetMapName()).Disable();
+    }
 }
