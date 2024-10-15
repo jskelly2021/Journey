@@ -1,0 +1,6 @@
+@startuml PauseController
+class PauseController {
+    {static} +PauseGame()
+    {static} +ResumeGame()
+}
+@enduml

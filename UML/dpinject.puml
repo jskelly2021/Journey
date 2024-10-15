@@ -3,34 +3,10 @@
 
 !include GameManager.puml
 !include StoreSystem/StoreSystem.puml
-
-class PauseController {
-    {static} +PauseGame()
-    {static} +ResumeGame()
-}
-class PauseButtonController {
-    +pauseGame()
-    +resumeGame()
-}
-
-class TransitionController {
-    {static} +StartGame()
-    {static} +GoToMenu()
-}
-class TransitionButtonController {
-    +startGame()
-    +goToMenu()
-}
-
-class GameObject
+!include Pause/PauseSystem.puml
+!include Transition/TransitionSystem.puml
 
 GameManager -up- StoreController : "Injects >"
 GameManager -up- PauseController : "Injects >"
 GameManager -up- TransitionController : "Injects >"
-
-PauseButtonController -down- PauseController : "Calls >"
-TransitionButtonController -down- TransitionController : "Calls >"
-
-GameObject -down- PauseButtonController : "Has >"
-GameObject -down- TransitionButtonController : "Has >"
 @endluml

@@ -1,0 +1,9 @@
+@startuml PauseSystem
+!include PauseButtonController.puml
+!include PauseController.puml
+
+class GameObject
+
+PauseButtonController "0..*" -down- "1..1" PauseController       : "Calls >"
+GameObject            "0..*" -down- "0..1" PauseButtonController : "Has >"
+@enduml

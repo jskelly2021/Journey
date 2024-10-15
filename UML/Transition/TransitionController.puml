@@ -1,0 +1,6 @@
+@startuml TransitionController
+class TransitionController {
+    {static} +StartGame()
+    {static} +GoToMenu()
+}
+@enduml

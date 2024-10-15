@@ -1,0 +1,9 @@
+@startuml TransitionSystem
+!include TransitionButtonController.puml
+!include TransitionController.puml
+
+class GameObject
+
+TransitionButtonController "0..*" -down- "1..1" TransitionController : "Calls >"
+GameObject                 "0..*" -down- "0..1" TransitionButtonController : "Has >"
+@enduml

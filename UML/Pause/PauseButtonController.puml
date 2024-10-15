@@ -1,0 +1,6 @@
+@startuml PauseButtonController
+class PauseButtonController {
+    +pauseGame()
+    +resumeGame()
+}
+@enduml

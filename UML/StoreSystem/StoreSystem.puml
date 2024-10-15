@@ -3,6 +3,6 @@
 !include StoreButtonController.iuml
 !include Store.iuml
 
-Store                 "0..*" -down- "0..1" StoreController : "Calls >"
-StoreButtonController "0..*" -down- "0..1" StoreController : "Calls >"
+Store                 "0..*" -down- "1..1" StoreController : "Calls >"
+StoreButtonController "0..*" -down- "1..1" StoreController : "Calls >"
 @enduml
