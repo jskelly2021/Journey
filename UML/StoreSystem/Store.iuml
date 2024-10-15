@@ -1,0 +1,11 @@
+@startuml Store
+class Store {
+    -StoreID
+    -Inventory
+    -Clerk
+    -Interact()
+}
+class GameObject
+
+GameObject "0..*" -down- "0..1" Store : "Has >"
+@enduml

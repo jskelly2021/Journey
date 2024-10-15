@@ -1,0 +1,15 @@
+@startuml GameManager
+!theme reddress-darkblue
+
+!include services/Services.puml
+
+class GameManager {
+    -instance
+}
+
+GameManager -down- IUIService : "Has >"
+GameManager -down- IInputService : "Has >"
+GameManager -down- IGameStateService : "Has >"
+GameManager -down- IAudioService : "Has >"
+GameManager -down- ISceneService : "Has >"
+@enduml

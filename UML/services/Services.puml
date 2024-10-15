@@ -1,0 +1,7 @@
+@startuml Services
+!include AudioSystem/AudioSystem.iuml
+!include GameStateSystem/GameStateSystem.iuml
+!include InputSystem/InputSystem.iuml
+!include SceneSystem/SceneSystem.iuml
+!include UISystem/UISystem.iuml
+@enduml

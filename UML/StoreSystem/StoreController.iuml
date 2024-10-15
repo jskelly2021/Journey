@@ -1,0 +1,6 @@
+@startuml StoreController
+class StoreController {
+    {static} +OpenStore()
+    {static} +CloseStore()
+}
+@enduml
