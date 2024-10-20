@@ -1,0 +1,13 @@
+@startuml MainState
+
+state Main {
+    !include GameplayState.puml
+
+    state "Pause Menu" as PauseMenu
+
+    [*]       -down->  Gameplay
+    Gameplay  -right-> PauseMenu
+    PauseMenu -left->  Gameplay
+}
+
+@enduml

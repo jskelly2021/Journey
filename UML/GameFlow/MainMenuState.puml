@@ -1,0 +1,16 @@
+@startuml MainMenuState
+
+state "Main Menu" as MainMenu {
+    state "Start Menu" as StartMenu
+    StartMenu : Start Game
+    StartMenu : Options
+    StartMenu : Quit
+
+    state "Options Menu" as OptionsMenu
+
+    [*]       -down->  StartMenu
+    StartMenu -right-> OptionsMenu
+    OptionsMenu   -left->  StartMenu
+}
+
+@enduml

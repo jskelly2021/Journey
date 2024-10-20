@@ -1,0 +1,7 @@
+@startuml GameplayState
+
+state Gameplay {
+    
+}
+
+@enduml

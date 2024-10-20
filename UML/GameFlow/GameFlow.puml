@@ -1,0 +1,11 @@
+@startuml GameFlow
+!theme reddress-darkblue
+
+!include MainState.puml
+!include MainMenuState.puml
+
+[*]       -down->  MainMenu
+StartMenu -right-> Main
+PauseMenu -right-> MainMenu
+
+@enduml
