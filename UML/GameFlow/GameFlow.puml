@@ -1,11 +1,12 @@
 @startuml GameFlow
 !theme reddress-darkblue
+skinparam linetype ortho 
 
 !include MainState.puml
 !include MainMenuState.puml
 
 [*]       -down->  MainMenu
 StartMenu -right-> Main
-PauseMenu -right-> MainMenu
+PauseMenu -left-> MainMenu
 
 @enduml

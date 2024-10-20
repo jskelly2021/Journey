@@ -1,0 +1,18 @@
+@startuml ColonyState
+skinparam linetype ortho 
+
+state Colony {
+    state Mobile
+    state Store
+    State Dialogue
+
+    [*]    -down-> Mobile
+
+    Mobile <-down- Store
+    Mobile -down-> Store
+
+    Mobile -right-> Dialogue
+    Mobile <-left- Dialogue
+}
+
+    @enduml

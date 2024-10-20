@@ -1,7 +1,16 @@
 @startuml GameplayState
+skinparam Linetype ortho
 
 state Gameplay {
-    
+    !include ColonyState.puml
+    !include TravelState.puml
+
+    state Colony
+    state Travel
+
+    [*]   -down-> Colony
+    Mobile -right-> Travel
+    InShip -left->  Colony
 }
 
 @enduml

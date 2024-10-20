@@ -4,7 +4,7 @@ state "Main Menu" as MainMenu {
     state "Start Menu" as StartMenu
     StartMenu : Start Game
     StartMenu : Options
-    StartMenu : Quit
+    StartMenu : Quit Game
 
     state "Options Menu" as OptionsMenu
 

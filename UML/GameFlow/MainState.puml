@@ -1,13 +1,17 @@
 @startuml MainState
+skinparam linetype ortho 
 
 state Main {
     !include GameplayState.puml
 
     state "Pause Menu" as PauseMenu
+    PauseMenu : Resume
+    PauseMenu : Return to Menu
+    PauseMenu : Quit Game
 
     [*]       -down->  Gameplay
-    Gameplay  -right-> PauseMenu
-    PauseMenu -left->  Gameplay
+    Gameplay  -left-> PauseMenu
+    PauseMenu -right->  Gameplay
 }
 
 @enduml

@@ -1,0 +1,13 @@
+@startuml TravelState
+skinparam Linetype ortho
+
+state Travel {
+    state "In Ship" as InShip
+    state Scenario
+
+    [*]    -down->  InShip
+    InShip -right-> Scenario
+    InShip <-right- Scenario
+}
+
+@enduml
