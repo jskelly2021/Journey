@@ -2,7 +2,7 @@
 !theme reddress-darkblue
 
 !include GameManager.puml
-!include StoreSystem/StoreSystem.puml
+!include Store/StoreSystem.puml
 !include Pause/PauseSystem.puml
 !include Transition/TransitionSystem.puml
 
